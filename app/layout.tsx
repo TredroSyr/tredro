@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
+import Footer from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -121,6 +122,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${thmanyahSans.variable}   antialiased`}
     >
       <body className=" flex flex-col font-thmanyah">
+        <Header />
         {children}
         {/* Structured Data */}
         <script
@@ -143,7 +145,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             }),
           }}
         />
-        <Header></Header>
+        <Footer />
       </body>
     </html>
   );
