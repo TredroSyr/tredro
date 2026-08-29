@@ -916,9 +916,9 @@ export const RepPhoneInspectSection: React.FC = () => {
 
             <p className=" text-base sm:text-lg leading-relaxed font-normal">
               تطبيق مخصص لمندوبي مبيعات الجملة على هواتف أندرويد. يبدأ المندوب
-              يومه بفتح التطبيق للاطلاع على خط السير المخصص لليوم، تحديد مواقع
-              السوبرماركت على خريطة GPS، تحصيل الذمم المالية، وإصدار الفواتير
-              الفورية.
+              يومه بفتح التطبيق للاطلاع على خط السير المخصص لليوم، وتحديد مواقع
+              السوبرماركت على الخريطة عبر GPS، وتحصيل الذمم المالية، وإصدار
+              الفواتير الفورية.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs sm:text-sm">
@@ -942,10 +942,10 @@ export const RepPhoneInspectSection: React.FC = () => {
                   <IconRenderer name="location_filled" className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-extrabold mb-1">دقة تحديد المواقع GPS</h4>
+                  <h4 className="font-extrabold mb-1">دقة تحديد الموقع عبر GPS</h4>
                   <p className=" text-xs">
-                    زر معايرة وتثبيت فوري لموقع المندوب لمنع التلاعب وضمان
-                    الزيارات الفعلية.
+                    زر واحد لتثبيت موقع المندوب فوراً، لمنع التلاعب وضمان صحة
+                    الزيارات الميدانية.
                   </p>
                 </div>
               </Card>

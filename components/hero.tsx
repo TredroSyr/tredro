@@ -19,28 +19,27 @@ export const HeroSection = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className=" space-y-3 sm:space-y-4 mb-8 sm:mb-10 w-full text-center">
             <h1 className=" font-black tracking-tight text-foreground leading-[1.18]">
-              منظومة{" "}
+              منصة{" "}
               <span className="text-primary text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.18]">
                 Tredro
-              </span>
-              {"  "}
+              </span>{" "}
               لتوزيع الجملة وإدارة المناديب والمخزون
             </h1>
             <p className=" text-muted-foreground tracking-tight leading-snug">
-              نظام متكامل يربط الشركة، مناديب المبيعات الميدانية، ومحلات
-              السوبرماركت في منصة واحدة ذكية.
+              منصة ذكية واحدة تربط الشركة، مناديب المبيعات الميدانية، ومحلات
+              السوبرماركت في دورة عمل متكاملة.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row  justify-center items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
             <Button
               onClick={handleCta}
-              className="w-full sm:w-auto h-auto px-8 py-4   rounded-2xl active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 group"
+              className="w-full sm:w-auto h-auto  p-2 px-4   rounded-3xl active:scale-95 transition-all duration-200 flex  group"
             >
               <span>ابدأ تجربة Tredro مجاناً</span>
               <IconRenderer
-                name="arrow_left_outlined"
-                className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+                name="arrow-up-right"
+                className="w-12 h-12 group-hover:-translate-x-1 transition-transform"
               />
             </Button>
           </div>

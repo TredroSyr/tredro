@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 
 const SITE_URL = "https://tredro.online";
 const SITE_NAME = "Tredro | ترادرو";
-const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبات، والعملاء";
+const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبيات، والعملاء";
 const SITE_DESCRIPTION =
-  "منصة Tredro تربط الشركات بالمناديب والسوبرماركت في نظام واحد: إدارة المناديب، متابعة الزيارات، إدارة الطلبيات والفواتير، وتطبيق خاص لأصحاب المحلات لطلب البضاعة مباشرة من الشركات.";
+  "منصة Tredro تربط الشركات بالمناديب والسوبرماركت ضمن دورة عمل واحدة: إدارة المناديب، متابعة الزيارات، إدارة الطلبيات والفواتير، وتطبيق خاص لأصحاب المحلات لطلب البضاعة مباشرة من الشركات.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    locale: "ar_AR",
+    locale: "ar_SY",
     url: SITE_URL,
     siteName: SITE_NAME,
     title: SITE_TITLE,

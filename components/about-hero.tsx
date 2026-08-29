@@ -124,7 +124,7 @@ const AboutUs = () => {
               className="relative z-10 mt-4 h-auto gap-2 rounded-full bg-primary/10 border-primary/20 text-primary px-4 py-1.5 text-xs sm:text-sm font-bold"
             >
               <IconRenderer name="star_outlined" className="w-4 h-4" />
-              <span>رؤية منظومة Tredro لأتمتة التجارة والتوزيع الميداني</span>
+              <span>رؤية منصة Tredro لأتمتة التجارة والتوزيع الميداني</span>
             </Badge>
           </div>
 
@@ -139,7 +139,7 @@ const AboutUs = () => {
 
             <div className="text-muted-foreground text-base sm:text-lg leading-relaxed space-y-5 font-normal pt-2 text-justify sm:text-center">
               <p>
-                انطلقت منظومة{" "}
+                انطلقت منصة{" "}
                 <span className="font-bold text-foreground">Tredro</span> من
                 إدراك عميق للتحديات الجسيمة التي تواجه قطاع تجارة الجملة
                 والتوزيع التقليدي، حيث تتشتت العمليات بين الفواتير الورقية،
@@ -341,7 +341,7 @@ const AboutUs = () => {
               </h3>
               <p className="text-sm sm:text-base  leading-relaxed font-medium">
                 انضم اليوم إلى مئات الموردين والموزعين وأصحاب المتاجر الذين
-                يعتمدون على منظومة Tredro في إدارة مبيعاتهم اليومية.
+                يعتمدون على منصة Tredro في إدارة مبيعاتهم اليومية.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Button

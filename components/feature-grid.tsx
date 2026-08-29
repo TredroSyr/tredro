@@ -55,7 +55,7 @@ export const FeatureGrid: React.FC<{
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
-            جدول ميزات وأدوات منظومة{" "}
+            جدول ميزات وأدوات منصة{" "}
             <span className="font-sans text-primary">Tredro</span>
           </h2>
           <p className="text-sm sm:text-base font-bold text-muted-foreground">
@@ -101,9 +101,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("دليل المنتجات")}
             />
             <ToolCell
-              name="أوامر صوتية بالذكاء"
+              name="أوامر صوتية بالذكاء الاصطناعي"
               icon="voice_outlined"
-              onClick={() => handleCellClick("أوامر صوتية بالذكاء")}
+              onClick={() => handleCellClick("أوامر صوتية بالذكاء الاصطناعي")}
             />
             <ToolCell
               name="جدول التوريد والتسليم"
@@ -116,9 +116,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("معاينة الفواتير")}
             />
             <ToolCell
-              name="محافظ الزبائن"
+              name="أرصدة وحسابات الزبائن"
               icon="contacts_outlined"
-              onClick={() => handleCellClick("محافظ الزبائن")}
+              onClick={() => handleCellClick("أرصدة وحسابات الزبائن")}
             />
             <ToolCell
               name="قوالب الفواتير الضريبية"
@@ -140,9 +140,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("تقارير الأرباح والمبيعات")}
             />
             <ToolCell
-              name="تارجت المبيعات الشهري"
+              name="الهدف الشهري للمبيعات"
               icon="flag_outlined"
-              onClick={() => handleCellClick("تارجت المبيعات الشهري")}
+              onClick={() => handleCellClick("الهدف الشهري للمبيعات")}
             />
 
             {/* Center Left Spotlight (Cols 4-5, Rows 2-3): REPS / PROJECTS */}
@@ -240,14 +240,14 @@ export const FeatureGrid: React.FC<{
 
             {/* Row 2 - Right 3 cols */}
             <ToolCell
-              name="تسريع التوصيل الفوري"
+              name="توصيل فوري ومتابعة لحظية"
               icon="rocket_outlined"
-              onClick={() => handleCellClick("تسريع التوصيل الفوري")}
+              onClick={() => handleCellClick("توصيل فوري ومتابعة لحظية")}
             />
             <ToolCell
-              name="حالات الطلبات المخصصة"
+              name="حالات الطلبيات المخصصة"
               icon="assign_outlined"
-              onClick={() => handleCellClick("حالات الطلبات المخصصة")}
+              onClick={() => handleCellClick("حالات الطلبيات المخصصة")}
             />
             <ToolCell
               name="عروض الأسعار الآلية"
@@ -257,9 +257,9 @@ export const FeatureGrid: React.FC<{
 
             {/* Row 3 - Left 3 cols */}
             <ToolCell
-              name="ربط API مع المحاسبة"
+              name="التكامل مع برامج المحاسبة عبر API"
               icon="code_outlined"
-              onClick={() => handleCellClick("ربط API مع المحاسبة")}
+              onClick={() => handleCellClick("التكامل مع برامج المحاسبة عبر API")}
             />
             <ToolCell
               name="محطات التوزيع المركزية"
@@ -329,7 +329,7 @@ export const FeatureGrid: React.FC<{
                       />
                       <span>
                         تحليل <strong className="text-foreground">48</strong>{" "}
-                        متجر وطلب متصل
+                        متجراً ونمط الطلب
                       </span>
                     </div>
                     <div className="flex items-center justify-between text-[10px] bg-muted px-2 py-1 rounded-md">
@@ -355,7 +355,7 @@ export const FeatureGrid: React.FC<{
                   className="transition-transform duration-200 hover:scale-105"
                 />
                 <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
-                  Tredro Brain
+                  Tredro AI
                 </h3>
               </div>
             </div>
@@ -404,7 +404,7 @@ export const FeatureGrid: React.FC<{
                   <IconRenderer name="chat_conversation_filled" className="w-4 h-4" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
-                  طلبات المحلات
+                  طلبيات المحلات
                 </h3>
               </div>
             </div>
@@ -428,14 +428,14 @@ export const FeatureGrid: React.FC<{
 
             {/* Row 5 - Left 3 cols */}
             <ToolCell
-              name="رسائل إشعارات المبيعات"
+              name="إشعارات المبيعات الفورية"
               icon="mail_outlined"
-              onClick={() => handleCellClick("رسائل إشعارات المبيعات")}
+              onClick={() => handleCellClick("إشعارات المبيعات الفورية")}
             />
             <ToolCell
-              name="لوحات قياس الأداء KPI"
+              name="لوحات مؤشرات الأداء (KPI)"
               icon="overview_outlined"
-              onClick={() => handleCellClick("لوحات قياس الأداء KPI")}
+              onClick={() => handleCellClick("لوحات مؤشرات الأداء (KPI)")}
             />
             <ToolCell
               name="توقيت زيارات المحلات"
@@ -462,9 +462,9 @@ export const FeatureGrid: React.FC<{
 
             {/* ================= ROW 6 (10 Items) ================= */}
             <ToolCell
-              name="تصنيفات المواد"
+              name="تصنيفات المنتجات"
               icon="category_outlined"
-              onClick={() => handleCellClick("تصنيفات المواد")}
+              onClick={() => handleCellClick("تصنيفات المنتجات")}
             />
             <ToolCell
               name="دعم فني واستجابة 24/7"
@@ -472,9 +472,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("دعم فني واستجابة 24/7")}
             />
             <ToolCell
-              name="قوائم فحص السيارة"
+              name="قوائم فحص السيارات"
               icon="list_outlined"
-              onClick={() => handleCellClick("قوائم فحص السيارة")}
+              onClick={() => handleCellClick("قوائم فحص السيارات")}
             />
             <ToolCell
               name="جدولة خطوط السير"
@@ -492,9 +492,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("عروض تقديمية للشركات")}
             />
             <ToolCell
-              name="مخططات التوزيع غانت"
+              name="مخططات غانت للتوزيع"
               icon="list_view_outlined"
-              onClick={() => handleCellClick("مخططات التوزيع غانت")}
+              onClick={() => handleCellClick("مخططات غانت للتوزيع")}
             />
             <ToolCell
               name="خارطة طريق التوسع"
@@ -502,9 +502,9 @@ export const FeatureGrid: React.FC<{
               onClick={() => handleCellClick("خارطة طريق التوسع")}
             />
             <ToolCell
-              name="صندوق الوارد والطلبات"
+              name="صندوق الوارد والطلبيات"
               icon="message_center_outlined"
-              onClick={() => handleCellClick("صندوق الوارد والطلبات")}
+              onClick={() => handleCellClick("صندوق الوارد والطلبيات")}
             />
             <ToolCell
               name="فرق عمل المناديب"

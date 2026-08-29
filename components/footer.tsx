@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 ">
           <div className="flex items-center gap-2">
-            <span>صُممت بعناية لتطوير كفاءة التوزيع والمبيعات الميدانية</span>
+            <span>صُممت منصة Tredro بعناية لتطوير كفاءة التوزيع والمبيعات الميدانية</span>
           </div>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-slate-300">
@@ -17,7 +17,7 @@ const Footer = () => {
               أمان البيانات
             </a>
             <span>
-              © {new Date().getFullYear()} منظومة Tredro. جميع الحقوق محفوظة.
+              © {new Date().getFullYear()} منصة Tredro. جميع الحقوق محفوظة.
             </span>
           </div>
         </div>

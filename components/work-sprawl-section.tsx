@@ -12,15 +12,15 @@ export const WorkSprawlSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto space-y-4 mb-8 sm:mb-24">
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-foreground tracking-tight leading-[1.18]">
-            60% من وقت مناديب التوزيع يضيع في التشتت{" "}
+            60% من وقت مناديب التوزيع يضيع بسبب تشتت وسائل التواصل،{" "}
             <br className="hidden sm:block" />
             <span className="text-muted-foreground">
-              – والطلبات اليدوية تسبب فوضى المخزون
+              والطلبيات اليدوية تُسبب فوضى في المخزون
             </span>
           </h2>
           <p className="text-base sm:text-xl font-bold text-muted-foreground max-w-2xl mx-auto">
-            تعدد برامج المحادثة، دفاتر الفواتير الورقية، وانعدام الربط مع
-            المستودع يعطل نمو أعمالك.
+            تعدد قنوات التواصل، دفاتر الفواتير الورقية، وانعدام الربط مع
+            المستودع — كل ذلك يعطّل نمو أعمالك.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export const WorkSprawlSection: React.FC = () => {
                   variant="outline"
                   className="absolute top-8 right-0 h-auto whitespace-normal bg-card/95 backdrop-blur-sm border-border px-3 py-1 text-[11px] font-bold text-foreground shadow-md transform rotate-2 hover:scale-105 transition-transform"
                 >
-                  هل الصنف متوفر بالمستودع؟
+                  هل المنتج متوفر في المستودع؟
                 </Badge>
                 <Badge
                   variant="outline"
@@ -146,7 +146,7 @@ export const WorkSprawlSection: React.FC = () => {
                   تشتت قنوات التواصل
                 </div>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-bold">
-                  ضياع الطلبات بين رسائل الواتساب والمكالمات يقلل كفاءة المندوب
+                  ضياع الطلبيات بين رسائل الواتساب والمكالمات يقلل كفاءة المندوب
                   بنسبة تصل إلى{" "}
                   <strong className="font-black text-foreground text-base">
                     35%
@@ -169,8 +169,8 @@ export const WorkSprawlSection: React.FC = () => {
                   <strong className="font-black text-foreground text-base">
                     80% من الشركات
                   </strong>{" "}
-                  تعاني من صعوبة التحقق من وصول المناديب الفعلي وتثبيت مواقع
-                  الزبائن
+                  تعاني من صعوبة التحقق الفعلي من وصول المناديب، وتثبيت مواقع
+                  الزبائن على الخريطة
                 </p>
               </CardContent>
             </Card>
@@ -189,7 +189,7 @@ export const WorkSprawlSection: React.FC = () => {
                   <strong className="font-black text-foreground text-base">
                     ساعتان ونصف يومياً
                   </strong>{" "}
-                  تُهدر في مراجعة كشوفات الإدخال، مرتجعات البضاعة وتسوية العهد
+                  تُهدر في مراجعة فواتير الإدخال، مرتجعات البضاعة، وتسوية العُهد
                   المالية
                 </p>
               </CardContent>
