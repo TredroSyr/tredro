@@ -12,8 +12,8 @@ const AboutUs = () => {
     { num: 11, dayAr: "الثلاثاء", label: "يوم عمل اعتيادي" },
     { num: 12, dayAr: "الأربعاء", label: "يوم عمل اعتيادي" },
     { num: 13, dayAr: "الخميس", label: "يوم عمل اعتيادي" },
-    { num: 14, dayAr: "الجمعة", label: "يوم عمل اعتيادي" },
-    { num: 15, dayAr: "السبت", label: "يوم التوفير المكتسب ⚡", isSaved: true },
+
+    { num: 15, dayAr: "السبت", label: "يوم التوفير المكتسب", isSaved: true },
     { num: 16, dayAr: "الأحد", label: "يوم عمل اعتيادي" },
   ];
 
@@ -91,8 +91,9 @@ const AboutUs = () => {
   };
 
   return (
-    <div>
-      <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-28 overflow-hidden bg-gradient-to-b from-muted/40 via-background to-background">
+    <div className="relative">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent pointer-events-none -z-10 blur-3xl" />
+      <section className="relative pt-12 sm:pt-20 pb-16 sm:pb-28 overflow-hidden">
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
           <div className="relative flex flex-col items-center justify-center pt-8 pb-12 sm:pb-20">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none -top-10 sm:-top-16 opacity-90">
@@ -188,7 +189,7 @@ const AboutUs = () => {
           </p>
 
           <Card className="max-w-2xl mx-auto p-3 sm:p-4 rounded-3xl mb-6">
-            <div className="grid grid-cols-7 gap-1 sm:gap-2">
+            <div className="grid grid-cols-6 gap-1 sm:gap-2">
               {calendarDays.map((d, idx) => {
                 const isActive = idx === selectedDayIndex;
                 return (
@@ -222,10 +223,18 @@ const AboutUs = () => {
                     </span>
 
                     {isActive && (
-                      <Badge className="absolute -top-3 h-auto whitespace-nowrap px-2.5 py-0.5 text-[9px] font-black">
-                        {d.isSaved
-                          ? "يوم موفّر ومكتسب ⚡"
-                          : "سير العمل المؤتمت"}
+                      <Badge className="absolute text-white -top-3 h-auto gap-1 whitespace-nowrap px-2.5 py-0.5 text-[9px] font-black">
+                        {d.isSaved ? (
+                          <>
+                            <IconRenderer
+                              name="success_filled"
+                              className="w-3 h-3"
+                            />
+                            <span>يوم موفّر ومكتسب</span>
+                          </>
+                        ) : (
+                          "سير العمل المؤتمت"
+                        )}
                       </Badge>
                     )}
                   </div>
@@ -233,17 +242,6 @@ const AboutUs = () => {
               })}
             </div>
           </Card>
-
-          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground font-medium">
-            <IconRenderer
-              name="clock_outlined"
-              className="w-3.5 h-3.5 text-primary"
-            />
-            <span>
-              يتنقل مؤشر الأيام تلقائياً لعرض دورة التوفير الأسبوعية (يمكنك
-              النقر على أي يوم لتحديده)
-            </span>
-          </div>
         </div>
       </section>
 
@@ -334,12 +332,16 @@ const AboutUs = () => {
             ))}
           </div>
 
-          <div className="mt-16 text-center rounded-3xl p-8 sm:p-12 AboutUs shadow-2xl border border-border relative ">
+          {/* CTA block — now carries its own responsive background glow, matching the hero pattern */}
+          <div className="mt-16 text-center rounded-3xl p-8 sm:p-12 shadow-2xl border border-border relative overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground">
+            <div className="absolute -top-24 -right-24 w-72 h-72 sm:w-96 sm:h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-black/10 rounded-full blur-3xl pointer-events-none" />
+
             <div className="relative z-10 max-w-2xl mx-auto space-y-6">
               <h3 className="text-2xl sm:text-4xl font-black tracking-tight">
                 هل أنت مستعد لبدء تجربة توزيع أكثر كفاءة وإنتاجية؟
               </h3>
-              <p className="text-sm sm:text-base  leading-relaxed font-medium">
+              <p className="text-sm sm:text-base leading-relaxed font-medium text-primary-foreground/90">
                 انضم اليوم إلى مئات الموردين والموزعين وأصحاب المتاجر الذين
                 يعتمدون على منصة Tredro في إدارة مبيعاتهم اليومية.
               </p>
@@ -347,6 +349,7 @@ const AboutUs = () => {
                 <Button
                   render={<Link href="/company" />}
                   size="lg"
+                  variant="secondary"
                   className="text-sm"
                 >
                   <IconRenderer name="partners_outlined" />
@@ -354,9 +357,9 @@ const AboutUs = () => {
                 </Button>
                 <Button
                   render={<Link href="/customer" />}
-                  variant="secondary"
+                  variant="outline"
                   size="lg"
-                  className="text-sm"
+                  className="text-sm bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-white/10"
                 >
                   <IconRenderer name="cart_outlined" />
                   <span>سجل كمتجر / سوبرماركت</span>

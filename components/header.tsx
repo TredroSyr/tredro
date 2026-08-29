@@ -12,8 +12,13 @@ import { useThemeStore } from "@/store/use-theme-store";
 
 const NAV_ITEMS = [
   { href: "/", label: "الرئيسية" },
+  { href: "/#work-sprawl", label: "التحديات" },
+  { href: "/#rep-mobile-inspect", label: "تطبيق المندوب" },
+  { href: "/#product", label: "المزايا" },
   { href: "/about", label: "من نحن" },
 ];
+
+const DASHBOARD_URL = "https://dashboard.tredro.online/";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,13 +26,32 @@ export const Header = () => {
   const theme = useThemeStore((state) => state.theme);
   const hasHydrated = useThemeStore((state) => state.hasHydrated);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
-  const themeToggleIcon = hasHydrated && theme === "dark" ? "morning_sun_outlined" : "moon_outlined";
+  const themeToggleIcon =
+    hasHydrated && theme === "dark" ? "morning_sun_outlined" : "moon_outlined";
+
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    const [path, hash] = href.split("#");
+    if (hash && (path === "" || path === "/") && pathname === "/") {
+      event.preventDefault();
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur-md transition-all duration-200">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+    <header className="relative sticky top-3 z-40 w-full px-4 transition-all duration-200 sm:top-4 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 z-0 rounded-full bg-gradient-to-b from-primary/30 via-primary/15 to-transparent blur-3xl pointer-events-none" />
+
+      <nav className="relative z-10 mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full border border-border/60 bg-background/60 px-4 shadow-lg shadow-black/5 backdrop-blur-[90px] backdrop-saturate-200 dark:border-border/40 dark:bg-background/40 sm:h-20 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6 sm:gap-8">
-          <Link href="/" className="flex items-center focus:outline-none" aria-label="Tredro Home">
+          <Link
+            href="/"
+            className="flex items-center focus:outline-none"
+            aria-label="Tredro Home"
+          >
             <Image
               src="/tredro/full_logo.svg"
               alt="logo"
@@ -45,7 +69,8 @@ export const Header = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-xl px-4 py-2 transition-all ${
+                  onClick={(event) => handleNavClick(event, item.href)}
+                  className={`rounded-full px-4 py-2 transition-all ${
                     isActive
                       ? "bg-primary/10 font-black text-primary shadow-xs"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -60,20 +85,16 @@ export const Header = () => {
 
         <div className="hidden items-center gap-3 sm:flex">
           <Button
-            render={<Link href="/customer" />}
-            variant="outline"
-            size="lg"
-            className="text-xs sm:text-sm"
-          >
-            <IconRenderer name="cart_outlined" />
-            <span>ابدأ كزبون</span>
-          </Button>
-
-          <Button
-            render={<Link href="/company" />}
+            render={
+              <a
+                href={DASHBOARD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
             variant="default"
             size="lg"
-            className="text-xs sm:text-sm"
+            className="rounded-full text-xs sm:text-sm"
           >
             <IconRenderer name="partners_outlined" />
             <span>ابدأ كشركة</span>
@@ -84,13 +105,25 @@ export const Header = () => {
             size="icon"
             onClick={toggleTheme}
             aria-label="تبديل المظهر"
+            className="rounded-full"
           >
             <IconRenderer name={themeToggleIcon} />
           </Button>
         </div>
 
         <div className="flex items-center gap-2 sm:hidden">
-          <Button render={<Link href="/company" />} variant="default" size="sm" className="text-[11px]">
+          <Button
+            render={
+              <a
+                href={DASHBOARD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              />
+            }
+            variant="default"
+            size="sm"
+            className="rounded-full text-[11px]"
+          >
             ابدأ كشركة
           </Button>
 
@@ -99,6 +132,7 @@ export const Header = () => {
             size="icon"
             onClick={toggleTheme}
             aria-label="تبديل المظهر"
+            className="rounded-full"
           >
             <IconRenderer name={themeToggleIcon} />
           </Button>
@@ -108,14 +142,17 @@ export const Header = () => {
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            className="rounded-full"
           >
-            <IconRenderer name={mobileMenuOpen ? "close_outlined" : "menu_outlined"} />
+            <IconRenderer
+              name={mobileMenuOpen ? "close_outlined" : "menu_outlined"}
+            />
           </Button>
         </div>
       </nav>
 
       {mobileMenuOpen && (
-        <div className="animate-in slide-in-from-top-2 space-y-3 border-t border-border bg-background px-4 pt-3 pb-6 text-right shadow-xl duration-200 sm:hidden">
+        <div className="animate-in slide-in-from-top-2 relative z-10 mx-auto mt-2 max-w-7xl space-y-3 rounded-3xl border border-border/60 bg-background/80 px-4 pt-3 pb-6 text-right shadow-xl backdrop-blur-2xl backdrop-saturate-150 duration-200 sm:hidden">
           <div className="flex flex-col gap-1 text-sm font-bold text-foreground">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
@@ -124,8 +161,8 @@ export const Header = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`rounded-xl p-3 text-right transition-colors ${
+                  onClick={(event) => handleNavClick(event, item.href)}
+                  className={`rounded-2xl p-3 text-right transition-colors ${
                     isActive
                       ? "bg-primary/10 font-extrabold text-primary"
                       : "hover:bg-accent hover:text-accent-foreground"
@@ -139,18 +176,16 @@ export const Header = () => {
 
           <div className="flex flex-col gap-2 border-t border-border pt-3">
             <Button
-              render={<Link href="/customer" onClick={() => setMobileMenuOpen(false)} />}
-              variant="outline"
-              className="w-full text-xs"
-            >
-              <IconRenderer name="cart_outlined" />
-              <span>ابدأ كزبون (سوبرماركت ومتاجر)</span>
-            </Button>
-
-            <Button
-              render={<Link href="/company" onClick={() => setMobileMenuOpen(false)} />}
+              render={
+                <a
+                  href={DASHBOARD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                />
+              }
               variant="default"
-              className="w-full text-xs"
+              className="w-full rounded-full text-xs"
             >
               <IconRenderer name="partners_outlined" />
               <span>ابدأ كشركة (موردين وموزعين)</span>
