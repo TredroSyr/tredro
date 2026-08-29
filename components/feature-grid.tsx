@@ -157,7 +157,9 @@ export const FeatureGrid: React.FC<{
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
             جدول ميزات وأدوات منصة{" "}
-            <span className="font-sans text-primary">Tredro</span>
+            <span className="text-primary text-3xl sm:text-5xl font-black  tracking-tight">
+              Tredro
+            </span>
           </h2>
           <p className="text-sm sm:text-base font-bold text-muted-foreground">
             تكامل شامل يغطي كل تفاصيل مبيعات الجملة، التوزيع الميداني،
