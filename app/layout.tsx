@@ -4,7 +4,7 @@ import "./globals.css";
 import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
-
+import "leaflet/dist/leaflet.css";
 const THEME_INIT_SCRIPT = `
 (function () {
   try {
