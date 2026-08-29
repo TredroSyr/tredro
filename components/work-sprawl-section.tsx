@@ -26,9 +26,116 @@ export const WorkSprawlSection: React.FC = () => {
 
         {/* Central Graphic Container with Tangled Ribbon Illustration */}
         <div className="relative max-w-5xl mx-auto mb-12">
-          {/* Tangled SVG Background Ribbon Line */}
-          <div className="relative w-full h-[90px] sm:h-[146px] md:h-[182px] lg:h-[260px] overflow-hidden select-none">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[260px] origin-top scale-[0.34] sm:scale-[0.56] md:scale-[0.7] lg:scale-100">
+          {/* ===================== MOBILE: VERTICAL RIBBON (top to bottom) ===================== */}
+          <div className="relative w-full h-[560px] sm:hidden overflow-hidden select-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[320px] h-[560px]">
+              <svg
+                viewBox="0 0 320 560"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-full"
+              >
+                {/* Soft glow path behind */}
+                <path
+                  d="M 160 30 C 100 30, 70 70, 90 110 C 110 150, 220 140, 230 90 C 238 55, 190 45, 175 75 C 160 105, 210 130, 230 170 C 248 205, 200 230, 165 220 C 130 210, 130 260, 170 270 C 210 280, 220 320, 190 340 C 160 360, 110 350, 110 390 C 110 425, 160 430, 170 465 C 178 495, 150 510, 160 540"
+                  stroke="var(--muted)"
+                  strokeWidth="24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="opacity-70"
+                />
+                <path
+                  d="M 160 30 C 100 30, 70 70, 90 110 C 110 150, 220 140, 230 90 C 238 55, 190 45, 175 75 C 160 105, 210 130, 230 170 C 248 205, 200 230, 165 220 C 130 210, 130 260, 170 270 C 210 280, 220 320, 190 340 C 160 360, 110 350, 110 390 C 110 425, 160 430, 170 465 C 178 495, 150 510, 160 540"
+                  stroke="var(--border)"
+                  strokeWidth="12"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M 160 30 C 100 30, 70 70, 90 110 C 110 150, 220 140, 230 90 C 238 55, 190 45, 175 75 C 160 105, 210 130, 230 170 C 248 205, 200 230, 165 220 C 130 210, 130 260, 170 270 C 210 280, 220 320, 190 340 C 160 360, 110 350, 110 390 C 110 425, 160 430, 170 465 C 178 495, 150 510, 160 540"
+                  stroke="var(--background)"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+
+              {/* Top Cluster: App Icons */}
+              <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-40 h-32 flex items-center justify-center">
+                {/* WhatsApp */}
+                <Card className="absolute -top-1 left-2 size-9 rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/30 items-center justify-center transform -rotate-6">
+                  <IconRenderer name="whatsapp_filled" className="w-4 h-4" />
+                </Card>
+                {/* Excel */}
+                <Card className="absolute top-1 right-3 size-9 rounded-xl bg-info text-info-foreground shadow-lg shadow-info/30 items-center justify-center transform rotate-12">
+                  <IconRenderer name="report_filled" className="w-4 h-4" />
+                </Card>
+                {/* Phone calls */}
+                <Card className="absolute bottom-2 left-6 size-9 rounded-xl bg-card border-border items-center justify-center transform rotate-6">
+                  <IconRenderer
+                    name="mobile_outlined"
+                    className="w-4 h-4 text-primary"
+                  />
+                </Card>
+                {/* Paper note */}
+                <Card className="absolute bottom-6 right-2 size-9 rounded-xl bg-warning text-warning-foreground shadow-lg shadow-warning/30 items-center justify-center transform -rotate-12">
+                  <IconRenderer name="sticky_filled" className="w-4 h-4" />
+                </Card>
+                <Card className="absolute top-10 left-12 size-8 rounded-full bg-destructive/15 text-destructive items-center justify-center">
+                  <IconRenderer name="warning_filled" className="w-3.5 h-3.5" />
+                </Card>
+              </div>
+
+              {/* Middle Cluster: AI Models */}
+              <div className="absolute top-[220px] left-1/2 -translate-x-1/2 w-40 h-32 flex items-center justify-center">
+                {/* Sparkle AI */}
+                <Card className="absolute top-0 left-8 size-10 rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/25 items-center justify-center">
+                  <IconRenderer name="ai_filled" className="w-5 h-5" />
+                </Card>
+                {/* GPS Tracker */}
+                <Card className="absolute top-6 right-4 size-9 rounded-2xl bg-card border-border items-center justify-center">
+                  <IconRenderer
+                    name="pin_filled"
+                    className="w-4 h-4 text-primary"
+                  />
+                </Card>
+                {/* Warehouse Sync */}
+                <Card className="absolute bottom-8 left-10 size-9 rounded-2xl bg-foreground text-background shadow-lg shadow-foreground/20 items-center justify-center">
+                  <IconRenderer name="bundle_filled" className="w-4 h-4" />
+                </Card>
+                {/* Brain Smart Matching */}
+                <Card className="absolute bottom-2 right-6 size-9 rounded-2xl bg-secondary text-secondary-foreground shadow-lg items-center justify-center">
+                  <IconRenderer name="automation_filled" className="w-4 h-4" />
+                </Card>
+              </div>
+
+              {/* Bottom Cluster: Speech bubbles */}
+              <div className="absolute top-[420px] left-1/2 -translate-x-1/2 w-56 h-36">
+                <Badge
+                  variant="outline"
+                  className="absolute top-0 left-0 h-auto whitespace-normal bg-card/95 backdrop-blur-sm border-border px-3 py-1 text-[11px] font-bold text-foreground shadow-md transform -rotate-3"
+                >
+                  أين وصل المندوب؟
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="absolute top-10 right-0 h-auto whitespace-normal bg-card/95 backdrop-blur-sm border-border px-3 py-1 text-[11px] font-bold text-foreground shadow-md transform rotate-2"
+                >
+                  هل المنتج متوفر في المستودع؟
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="absolute bottom-0 left-8 h-auto whitespace-normal bg-card/95 backdrop-blur-sm border-border px-3 py-1 text-[11px] font-bold text-foreground shadow-md transform -rotate-1"
+                >
+                  تأكيد الفاتورة الضريبية
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          {/* ===================== DESKTOP/TABLET: HORIZONTAL RIBBON (original) ===================== */}
+          <div className="hidden sm:block relative w-full h-[146px] md:h-[182px] lg:h-[260px] overflow-hidden select-none">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[260px] origin-top scale-[0.56] md:scale-[0.7] lg:scale-100">
               <svg
                 viewBox="0 0 1000 260"
                 fill="none"

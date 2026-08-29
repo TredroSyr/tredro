@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Wifi, Battery } from "lucide-react";
 
 import { IconRenderer } from "@/assets/icons/iconRenderer";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 interface StoreLocation {
   id: string;
@@ -104,7 +106,6 @@ const SAMPLE_STORES: StoreLocation[] = [
 export const RepPhoneInspect: React.FC<{ className?: string }> = ({
   className = "",
 }) => {
-  // Mobile app state: 'launcher' (home screen with apps) | 'splash' | 'map'
   const [screenState, setScreenState] = useState<"launcher" | "splash" | "map">(
     "launcher",
   );
@@ -120,6 +121,21 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
   const [gpsNotification, setGpsNotification] = useState<string | null>(null);
   const [newStoreName, setNewStoreName] = useState("");
   const [newStoreAddress, setNewStoreAddress] = useState("");
+
+  const [now, setNow] = useState(new Date());
+  useEffect(() => {
+    const interval = setInterval(() => setNow(new Date()), 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const statusBarTime = now.toLocaleTimeString("ar", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+  const launcherDayName = now.toLocaleDateString("ar-SY", { weekday: "long" });
+  const launcherDayNum = now.getDate();
+  const launcherMonthName = now.toLocaleDateString("ar-SY", { month: "long" });
 
   const daysList = [
     { name: "السبت", count: 4 },
@@ -165,25 +181,21 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
 
   return (
     <div className={`flex flex-col items-center justify-center  ${className}`}>
-      {/* Device Frame with Sleek Android Silhouette */}
-      <div className="relative w-full max-w-[min(340px,90vw)] sm:max-w-[360px] h-[670px]  rounded-[48px] p-3.5 shadow-2xl shadow-primary/30 border-4 border-foreground/70 ring-1 ring-foreground/40 select-none overflow-hidden">
-        {/* Dynamic Island / Punch hole camera */}
+      <div className="relative w-full max-w-[min(340px,90vw)] sm:max-w-[360px] h-[670px]  rounded-[48px] p-3.5 shadow-2xl shadow-primary/30 border-2 border-foreground/10 ring-1 ring-foreground/40 select-none overflow-hidden">
         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-24 h-4.5  rounded-full z-40 flex items-center justify-center ring-1 ring-background/10">
           <div className="w-2.5 h-2.5 rounded-full  border  mr-4" />
           <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
         </div>
 
-        {/* Screen Container */}
         <div className="relative w-full h-full  rounded-[38px] overflow-hidden flex flex-col ">
-          {/* Top Android Status Bar */}
           <div
             className={`w-full h-7 pt-1 px-5 flex items-center justify-between text-[11px] font-bold z-30 shrink-0 select-none transition-colors ${
               screenState === "launcher"
-                ? "/80 bg-transparent"
-                : "text-foreground/80 bg-background/90 backdrop-blur-md"
+                ? "text-foreground/80 bg-transparent"
+                : "text-background bg-foreground/60 backdrop-blur-sm"
             }`}
           >
-            <span>6:08</span>
+            <span>{statusBarTime}</span>
             <div className="flex items-center gap-1.5 text-xs">
               <Wifi className="w-3 h-3" />
               <span className="text-[10px] font-bold">67%</span>
@@ -191,22 +203,20 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
             </div>
           </div>
 
-          {/* ========================================================
-              SCREEN 1: PHONE HOME SCREEN (LAUNCHER)
-              ======================================================== */}
           {screenState === "launcher" && (
             <div className="relative flex-1 w-full h-full  p-4 flex flex-col justify-between  animate-in fade-in duration-300">
-              {/* Wallpaper Ambient Glow */}
               <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-info/20 rounded-full blur-3xl pointer-events-none" />
 
               <div className="pt-6 text-center space-y-1 z-10">
-                <div className="text-4xl  tracking-tight font-sans">06:08</div>
+                <div className="text-4xl  tracking-tight font-sans">
+                  {statusBarTime}
+                </div>
                 <div className="text-xs  font-bold">
-                  السبت، 28 آب • 29° مشمس
+                  {launcherDayName}، {launcherDayNum} {launcherMonthName} • 29°
+                  مشمس
                 </div>
 
-                {/* Google / Quick Search Pill */}
                 <div className="mt-4 mx-auto max-w-[260px]  backdrop-blur-md border  rounded-full px-3 py-1.5 flex items-center justify-between text-[11px] ">
                   <div className="flex items-center gap-2">
                     <IconRenderer
@@ -219,11 +229,8 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                 </div>
               </div>
 
-              {/* Main Apps Grid on Home Screen */}
               <div className="space-y-6 z-10">
-                {/* App Row 1: Common Apps */}
                 <div className="grid grid-cols-4 gap-3 text-center">
-                  {/* Phone */}
                   <div className="flex flex-col items-center gap-1.5">
                     <div className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg shadow-primary/30">
                       <IconRenderer name="mobile_filled" className="w-6 h-6" />
@@ -231,7 +238,6 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                     <span className="text-[10px] font-bold ">الهاتف</span>
                   </div>
 
-                  {/* Messages */}
                   <div className="flex flex-col items-center gap-1.5">
                     <div className="w-12 h-12 rounded-2xl bg-info text-info-foreground flex items-center justify-center shadow-lg shadow-info/30">
                       <IconRenderer
@@ -242,22 +248,27 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                     <span className="text-[10px] font-bold ">الرسائل</span>
                   </div>
 
-                  {/* Camera */}
-                  <div className="relative animate-bounce w-13 h-13 rounded-2xl cursor-pointer bg-accent  border-primary-foreground/80 flex items-center justify-center shadow-xl shadow-primary/60 group-hover:scale-105 transition-transform shrink-0">
-                    <Image
-                      src="/tredro/logo.svg"
-                      alt="logo"
-                      width={30}
-                      height={30}
-                      onClick={handleLaunchApp}
-                      className="transition-transform duration-200 hover:scale-105 "
-                    />
-                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-destructive border-2 border-foreground flex items-center justify-center text-[9px] font-black text-primary-foreground">
-                      4
+                  <Button
+                    variant="ghost"
+                    onClick={handleLaunchApp}
+                    className="flex flex-col items-center gap-1.5 h-auto p-0 hover:bg-transparent"
+                  >
+                    <div className="relative w-12 h-12 rounded-2xl bg-background flex items-center justify-center shadow-lg shrink-0">
+                      <Image
+                        src="/tredro/logo.svg"
+                        alt="logo"
+                        width={26}
+                        height={26}
+                      />
+                      <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-destructive border-2 border-foreground flex items-center justify-center text-[9px] font-black text-primary-foreground">
+                        4
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-bold ">
+                      Tredro Mandoub
                     </span>
-                  </div>
+                  </Button>
 
-                  {/* Settings */}
                   <div className="flex flex-col items-center gap-1.5">
                     <div className="w-12 h-12 rounded-2xl bg-accent text-accent-foreground flex items-center justify-center shadow-lg">
                       <IconRenderer
@@ -270,12 +281,11 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                 </div>
               </div>
 
-              {/* Bottom Dock Apps */}
               <div className=" backdrop-blur-xl border  rounded-3xl p-2.5 flex items-center justify-around z-10">
-                {/* Store Icon */}
-                <button
+                <Button
+                  variant="ghost"
                   onClick={handleLaunchApp}
-                  className="flex flex-col items-center gap-1 hover:scale-110 transition-transform"
+                  className="flex flex-col items-center gap-1 h-auto p-0 hover:bg-transparent hover:scale-110 transition-transform"
                 >
                   <div className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md shadow-primary/30">
                     <Image
@@ -285,22 +295,22 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                       height={20}
                     />
                   </div>
-                </button>
+                </Button>
 
-                {/* Map */}
-                <button
+                <Button
+                  variant="ghost"
                   onClick={handleLaunchApp}
-                  className="flex flex-col items-center gap-1 hover:scale-110 transition-transform"
+                  className="flex flex-col items-center gap-1 h-auto p-0 hover:bg-transparent hover:scale-110 transition-transform"
                 >
                   <div className="w-10 h-10 rounded-xl bg-info text-info-foreground flex items-center justify-center shadow-md">
                     <IconRenderer name="map_outlined" className="w-5 h-5" />
                   </div>
-                </button>
+                </Button>
 
-                {/* Invoices */}
-                <button
+                <Button
+                  variant="ghost"
                   onClick={handleLaunchApp}
-                  className="flex flex-col items-center gap-1 hover:scale-110 transition-transform"
+                  className="flex flex-col items-center gap-1 h-auto p-0 hover:bg-transparent hover:scale-110 transition-transform"
                 >
                   <div className="w-10 h-10 rounded-xl bg-warning text-warning-foreground flex items-center justify-center shadow-md">
                     <IconRenderer
@@ -308,27 +318,24 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                       className="w-5 h-5"
                     />
                   </div>
-                </button>
+                </Button>
 
-                {/* POS */}
-                <button
+                <Button
+                  variant="ghost"
                   onClick={handleLaunchApp}
-                  className="flex flex-col items-center gap-1 hover:scale-110 transition-transform"
+                  className="flex flex-col items-center gap-1 h-auto p-0 hover:bg-transparent hover:scale-110 transition-transform"
                 >
                   <div className="w-10 h-10 rounded-xl bg-accent text-accent-foreground flex items-center justify-center shadow-md">
                     <IconRenderer name="cart_filled" className="w-5 h-5" />
                   </div>
-                </button>
+                </Button>
               </div>
             </div>
           )}
 
-          {/* ========================================================
-              SCREEN 2: APP SPLASH SCREEN ANIMATION
-              ======================================================== */}
           {screenState === "splash" && (
-            <div className="flex-1 w-[400px] h-full  flex flex-col items-center justify-center text-primary-foreground p-6 animate-in zoom-in-95 duration-200">
-              <div className="w-20 h-20 rounded-3xl  backdrop-blur-md border border-primary-foreground/20 flex items-center justify-center shadow-2xl mb-4 animate-pulse">
+            <div className="flex-1  w-125  flex justify-center items-center animate-in fade-in duration-200">
+              <div className="w-20 h-20 rounded-3xl bg-background flex items-center justify-center">
                 <Image
                   src="/tredro/logo.svg"
                   alt="logo"
@@ -339,55 +346,25 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
             </div>
           )}
 
-          {/* ========================================================
-              SCREEN 3: FULL INTERACTIVE GPS MAP VIEW
-              ======================================================== */}
           {screenState === "map" && (
             <div className="flex-1 w-full h-full flex flex-col bg-muted overflow-hidden animate-in fade-in duration-300">
-              {/* Top Navigation & Day Filter Bar */}
               <div className="w-full bg-card px-2 py-1.5 border-b border-border z-20 shrink-0 shadow-xs">
-                {/* Header with Back to Launcher Button */}
-                <div className="flex items-center justify-between pb-1.5 mb-1 border-b border-border px-1 text-xs">
-                  <button
-                    onClick={handleGoHome}
-                    className="flex items-center gap-1 text-muted-foreground hover:text-primary font-bold px-2 py-0.5 rounded-lg hover:bg-muted transition-colors cursor-pointer"
-                    title="الرجوع إلى شاشة الهاتف"
-                  >
-                    <IconRenderer
-                      name="home_outlined"
-                      className="w-3.5 h-3.5"
-                    />
-                    <span className="text-[10px]">الهاتف</span>
-                  </button>
-
-                  <div className="flex items-center gap-1.5 font-black text-foreground text-[11px]">
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <span>خط سير {selectedDay} (مباشر)</span>
-                  </div>
-
-                  <button
-                    onClick={handleGpsLocate}
-                    className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-lg border border-primary/20"
-                  >
-                    GPS نشط
-                  </button>
-                </div>
-
-                {/* Day Filter Tabs */}
                 <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 justify-end">
                   {daysList.map((day) => {
                     const isSelected = selectedDay === day.name;
                     return (
-                      <button
+                      <Button
                         key={day.name}
+                        variant={isSelected ? "default" : "ghost"}
+                        size="sm"
                         onClick={() => {
                           setSelectedDay(day.name);
                           setSelectedStore(null);
                         }}
-                        className={`px-3 py-1 rounded-full text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                        className={`rounded-full text-xs font-bold whitespace-nowrap flex items-center gap-1.5 h-auto py-1 px-3 ${
                           isSelected
-                            ? "bg-primary text-primary-foreground shadow-md shadow-primary/30 font-black"
-                            : "bg-transparent text-muted-foreground hover:bg-muted"
+                            ? "shadow-md shadow-primary/30 font-black"
+                            : "text-muted-foreground"
                         }`}
                       >
                         <span>{day.name}</span>
@@ -396,44 +373,45 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                         >
                           {day.count}
                         </span>
-                      </button>
+                      </Button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* Toast / Notification Popover */}
               {gpsNotification && (
-                <div className="absolute top-20 left-3 right-3 z-40 /95 text-[11px] font-bold px-3 py-2 rounded-xl shadow-xl border border-border flex items-center justify-between animate-in slide-in-from-top-2">
+                <div className="absolute top-14 left-3 right-3 z-40 bg-popover text-popover-foreground text-[11px] font-bold px-3 py-2 rounded-xl shadow-xl border border-border flex items-center justify-between animate-in slide-in-from-top-2">
                   <span>{gpsNotification}</span>
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={() => setGpsNotification(null)}
-                    className=" hover:"
+                    className="h-auto w-auto p-1 text-muted-foreground hover:text-foreground"
                   >
                     <IconRenderer
                       name="close_outlined"
                       className="w-3.5 h-3.5"
                     />
-                  </button>
+                  </Button>
                 </div>
               )}
 
-              {/* Main Interactive Map Canvas */}
               <div className="flex-1 relative bg-muted overflow-hidden select-none">
-                {/* SVG Vector Map Streets & Roads */}
                 <svg
-                  className="w-full h-full absolute inset-0 opacity-85"
+                  className="absolute inset-0 w-full h-full"
+                  viewBox="0 0 340 565"
+                  preserveAspectRatio="xMidYMid slice"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <defs>
                     <pattern
-                      id="rep-street-grid"
-                      width="60"
-                      height="60"
+                      id="aleppo-street-grid"
+                      width="34"
+                      height="34"
                       patternUnits="userSpaceOnUse"
                     >
                       <path
-                        d="M 60 0 L 0 0 0 60"
+                        d="M 34 0 L 0 0 0 34"
                         fill="none"
                         stroke="var(--border)"
                         strokeWidth="1"
@@ -443,74 +421,217 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                   <rect
                     width="100%"
                     height="100%"
-                    fill="url(#rep-street-grid)"
+                    fill="url(#aleppo-street-grid)"
                   />
 
-                  {/* Major Highway / Ring Road */}
-                  <path
-                    d="M -20 180 Q 150 120, 380 200"
-                    fill="none"
-                    stroke="var(--muted-foreground)"
-                    strokeWidth="10"
-                    opacity="0.35"
+                  <ellipse
+                    cx="170"
+                    cy="365"
+                    rx="95"
+                    ry="70"
+                    fill="var(--muted-foreground)"
+                    opacity="0.12"
                   />
-                  <path
-                    d="M -20 180 Q 150 120, 380 200"
-                    fill="none"
-                    stroke="var(--background)"
-                    strokeWidth="6"
+                  <ellipse
+                    cx="270"
+                    cy="300"
+                    rx="45"
+                    ry="30"
+                    fill="var(--muted-foreground)"
+                    opacity="0.1"
+                  />
+                  <ellipse
+                    cx="110"
+                    cy="300"
+                    rx="40"
+                    ry="26"
+                    fill="var(--muted-foreground)"
+                    opacity="0.1"
+                  />
+                  <ellipse
+                    cx="150"
+                    cy="150"
+                    rx="55"
+                    ry="35"
+                    fill="var(--muted-foreground)"
+                    opacity="0.08"
+                  />
+                  <ellipse
+                    cx="60"
+                    cy="470"
+                    rx="50"
+                    ry="30"
+                    fill="var(--muted-foreground)"
+                    opacity="0.08"
                   />
 
-                  {/* Secondary Main Avenue */}
                   <path
-                    d="M 280 -20 L 140 400"
+                    d="M 20 60 Q 150 100, 300 70"
                     fill="none"
-                    stroke="var(--muted-foreground)"
-                    strokeWidth="8"
-                    opacity="0.35"
+                    stroke="var(--border)"
+                    strokeWidth="2"
                   />
                   <path
-                    d="M 280 -20 L 140 400"
+                    d="M 40 140 L 300 160"
                     fill="none"
-                    stroke="var(--background)"
-                    strokeWidth="5"
-                  />
-
-                  {/* Connecting Arterials */}
-                  <path
-                    d="M 60 80 L 320 140"
-                    fill="none"
-                    stroke="var(--background)"
-                    strokeWidth="4"
+                    stroke="var(--border)"
+                    strokeWidth="2"
                   />
                   <path
-                    d="M 40 280 L 340 320"
+                    d="M 30 230 Q 170 260, 310 220"
                     fill="none"
-                    stroke="var(--background)"
-                    strokeWidth="4"
+                    stroke="var(--border)"
+                    strokeWidth="2"
                   />
                   <path
-                    d="M 120 40 L 160 360"
+                    d="M 170 40 L 170 540"
                     fill="none"
-                    stroke="var(--background)"
-                    strokeWidth="4"
+                    stroke="var(--border)"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M 20 340 L 320 380"
+                    fill="none"
+                    stroke="var(--border)"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M 60 420 Q 170 460, 290 430"
+                    fill="none"
+                    stroke="var(--border)"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M 90 40 L 60 540"
+                    fill="none"
+                    stroke="var(--border)"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M 260 60 L 290 520"
+                    fill="none"
+                    stroke="var(--border)"
+                    strokeWidth="1.5"
                   />
                 </svg>
 
-                {/* Arabic Street Name Labels */}
-                <div className="absolute top-12 right-6 text-[9px] font-bold text-muted-foreground/90 rotate-[-25deg] pointer-events-none">
-                  شارع طارق غسان
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "62%", top: "2%" }}
+                >
+                  Al-Musallamiye
                 </div>
-                <div className="absolute top-44 right-14 text-[9px] font-bold text-muted-foreground/90 rotate-[70deg] pointer-events-none">
-                  المحلق الشرقي
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "38%", top: "11%" }}
+                >
+                  HANDARAT
                 </div>
-                <div className="absolute bottom-28 left-8 text-[9px] font-bold text-muted-foreground/90 rotate-[-8deg] pointer-events-none">
-                  طريق المدينة المنورة
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "2%", top: "18%" }}
+                >
+                  Ratbah
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground text-center"
+                  style={{ left: "55%", top: "19%" }}
+                >
+                  MUKHAYAM
+                  <br />
+                  HANDARAT
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground text-center"
+                  style={{ left: "40%", top: "27%" }}
+                >
+                  WADI
+                  <br />
+                  BUSTAN
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "0%", top: "33%" }}
+                >
+                  AL AL
+                  <br />
+                  GLIZ
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "0%", top: "43%" }}
+                >
+                  mra
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "0%", top: "52%" }}
+                >
+                  nun
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "25%", top: "54%" }}
+                >
+                  ASHRAFIEH
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "78%", top: "54%" }}
+                >
+                  HANANO
+                </div>
+                <div
+                  className="absolute text-[13px] font-bold text-foreground"
+                  style={{ left: "42%", top: "65%" }}
+                >
+                  ALEPPO
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "50%", top: "72%" }}
+                >
+                  حي المرجة
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground text-center"
+                  style={{ left: "0%", top: "80%" }}
+                >
+                  RAMADANIYAH
+                  <br />
+                  DISTRICT
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground text-center"
+                  style={{ left: "42%", top: "87%" }}
+                >
+                  SHEIKH
+                  <br />
+                  SAEED
+                  <br />
+                  DISTRICT
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "70%", top: "89%" }}
+                >
+                  Azizi
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "8%", top: "96%" }}
+                >
+                  al-Sharfah
+                </div>
+                <div
+                  className="absolute text-[8px] font-semibold text-muted-foreground"
+                  style={{ left: "80%", top: "96%" }}
+                >
+                  Adh-Dhahabiye
                 </div>
 
-                {/* Rep Current Position Marker */}
                 <div
-                  className="absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                  className="absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
                   style={{ left: "46%", top: "48%" }}
                   onClick={handleGpsLocate}
                 >
@@ -520,7 +641,6 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                   </div>
                 </div>
 
-                {/* Store Markers on Route */}
                 {currentDayStores.map((store) => {
                   const isSelected = selectedStore?.id === store.id;
                   const isDone = store.status === "completed";
@@ -536,7 +656,7 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                           isSelected
                             ? "bg-primary text-primary-foreground border-background scale-110 shadow-primary/40 ring-2 ring-primary/50"
                             : isDone
-                              ? " border-background"
+                              ? "bg-card border-background"
                               : "bg-card text-foreground border-border"
                         }`}
                       >
@@ -551,24 +671,24 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                   );
                 })}
 
-                {/* Floating Action Controls on Map */}
                 <div className="absolute bottom-4 left-3 right-3 flex items-center justify-between z-30 pointer-events-auto">
-                  {/* 1. Left Floating GPS Target Button */}
-                  <button
+                  <Button
+                    variant="outline"
+                    size="icon"
                     onClick={handleGpsLocate}
-                    className="w-11 h-11 rounded-full bg-card text-primary border border-border shadow-lg flex items-center justify-center hover:bg-muted active:scale-95 transition-all cursor-pointer"
+                    className="w-11 h-11 rounded-full bg-card text-primary shadow-sm"
                     title="تحديد موقعي GPS"
                   >
                     <IconRenderer
                       name="location_outlined"
                       className="w-5 h-5"
                     />
-                  </button>
+                  </Button>
 
-                  {/* 2. Center Floating Pill: محلات اليوم */}
-                  <button
+                  <Button
+                    variant="outline"
                     onClick={() => setStoresListOpen(true)}
-                    className="px-5 py-2.5 bg-card text-foreground rounded-full border border-border shadow-lg font-bold text-xs flex items-center gap-2 hover:bg-muted active:scale-95 transition-all cursor-pointer"
+                    className="px-5 py-2.5 h-auto bg-card text-foreground rounded-full shadow-lg font-bold text-xs flex items-center gap-2"
                   >
                     <IconRenderer
                       name="list_outlined"
@@ -577,31 +697,32 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                     <span>
                       محلات {selectedDay} ({currentDayStores.length})
                     </span>
-                  </button>
+                  </Button>
 
-                  {/* 3. Right Floating Action Button (+ Blue Circle) */}
-                  <button
+                  <Button
+                    size="icon"
                     onClick={() => setAddStoreModalOpen(true)}
-                    className="w-11 h-11 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/40 flex items-center justify-center hover:bg-primary/90 active:scale-95 transition-all cursor-pointer"
+                    className="w-11 h-11 rounded-full shadow-lg shadow-primary/40"
                     title="إضافة متجر جديد في المسار"
                   >
                     <IconRenderer name="plus_filled" className="w-6 h-6" />
-                  </button>
+                  </Button>
                 </div>
 
-                {/* Store Quick Details Card / Bottom Sheet Popup */}
                 {selectedStore && (
                   <div className="absolute bottom-16 left-3 right-3 bg-card rounded-2xl p-3.5 shadow-2xl border border-border z-40 text-right animate-in slide-in-from-bottom-4">
                     <div className="flex items-start justify-between">
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         onClick={() => setSelectedStore(null)}
-                        className="text-muted-foreground hover:text-foreground p-1"
+                        className="h-auto w-auto p-1 text-muted-foreground hover:text-foreground"
                       >
                         <IconRenderer
                           name="close_outlined"
                           className="w-4 h-4"
                         />
-                      </button>
+                      </Button>
                       <div>
                         <div className="flex items-center gap-2 justify-end">
                           <Badge
@@ -646,7 +767,7 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                     </div>
 
                     <div className="mt-3 flex items-center gap-2">
-                      <button
+                      <Button
                         onClick={() => {
                           setGpsNotification(
                             `تم تسجيل طلبية جديدة لـ ${selectedStore.name} 🛒`,
@@ -654,15 +775,16 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                           setSelectedStore(null);
                           setTimeout(() => setGpsNotification(null), 3000);
                         }}
-                        className="flex-1 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md shadow-primary/20"
+                        className="flex-1 h-auto py-2 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md shadow-primary/20"
                       >
                         <IconRenderer
                           name="cart_filled"
                           className="w-3.5 h-3.5"
                         />
                         <span>إنشاء فاتورة / طلب</span>
-                      </button>
-                      <button
+                      </Button>
+                      <Button
+                        variant="secondary"
                         onClick={() => {
                           setGpsNotification(
                             `تم تسجيل تحصيل دفعة نقدية لـ ${selectedStore.name} 💰`,
@@ -670,242 +792,258 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
                           setSelectedStore(null);
                           setTimeout(() => setGpsNotification(null), 3000);
                         }}
-                        className="py-2 px-3 bg-muted hover:bg-muted/70 text-foreground font-bold rounded-xl text-xs"
+                        className="h-auto py-2 px-3 font-bold rounded-xl text-xs"
                       >
                         تحصيل
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Stores Drawer List */}
-              {storesListOpen && (
-                <div className="absolute inset-0 bg-black/40 z-50 flex flex-col justify-end animate-in fade-in">
-                  <div className="bg-card rounded-t-3xl p-4 max-h-[75%] overflow-y-auto text-right animate-in slide-in-from-bottom-5">
-                    <div className="flex items-center justify-between mb-3 pb-2 border-b border-border">
-                      <button
-                        onClick={() => setStoresListOpen(false)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <IconRenderer
-                          name="close_outlined"
-                          className="w-5 h-5"
-                        />
-                      </button>
-                      <h3 className="font-extrabold text-sm text-foreground">
-                        جدول محلات {selectedDay} ({currentDayStores.length})
-                      </h3>
-                    </div>
-
-                    <div className="space-y-2">
-                      {currentDayStores.map((s, idx) => (
-                        <div
-                          key={s.id}
-                          onClick={() => {
-                            setSelectedStore(s);
-                            setStoresListOpen(false);
-                          }}
-                          className="p-3 bg-muted hover:bg-primary/10 rounded-xl border border-border flex items-center justify-between cursor-pointer transition-colors"
-                        >
-                          <span className="text-xs text-primary font-bold">
-                            عرض على الخريطة
-                          </span>
-                          <div className="text-right">
-                            <div className="flex items-center gap-1.5 justify-end">
-                              <span className="font-bold text-xs text-foreground">
-                                {s.name}
-                              </span>
-                              <span className="w-4 h-4 rounded-full bg-primary/15 text-primary text-[10px] font-black flex items-center justify-center">
-                                {idx + 1}
-                              </span>
-                            </div>
-                            <span className="text-[10px] text-muted-foreground">
-                              {s.address}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Add Store Modal */}
-              {addStoreModalOpen && (
-                <div className="absolute inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                  <form
-                    onSubmit={handleAddStoreSubmit}
-                    className="bg-card rounded-3xl p-4 w-full text-right animate-in zoom-in-95"
-                  >
-                    <div className="flex items-center justify-between mb-3 pb-2 border-b border-border">
-                      <button
-                        type="button"
-                        onClick={() => setAddStoreModalOpen(false)}
-                        className="text-muted-foreground"
-                      >
-                        <IconRenderer
-                          name="close_outlined"
-                          className="w-4 h-4"
-                        />
-                      </button>
-                      <h3 className="font-bold text-xs text-foreground">
-                        إضافة عميل / سوبرماركت جديد
-                      </h3>
-                    </div>
-
-                    <div className="space-y-2.5 text-xs">
-                      <div>
-                        <label className="block text-[11px] font-bold text-foreground mb-1">
-                          اسم المحل
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="مثال: أسواق العاصمة"
-                          value={newStoreName}
-                          onChange={(e) => setNewStoreName(e.target.value)}
-                          className="w-full px-3 py-2 bg-muted border border-border rounded-xl text-xs text-right outline-none focus:border-primary"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[11px] font-bold text-foreground mb-1">
-                          العنوان / الشارع
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="مثال: شارع طارق غسان"
-                          value={newStoreAddress}
-                          onChange={(e) => setNewStoreAddress(e.target.value)}
-                          className="w-full px-3 py-2 bg-muted border border-border rounded-xl text-xs text-right outline-none focus:border-primary"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-center gap-2">
-                      <button
-                        type="submit"
-                        className="flex-1 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl text-xs"
-                      >
-                        حفظ في خط سير {selectedDay}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setAddStoreModalOpen(false)}
-                        className="py-2 px-3 bg-muted text-foreground font-bold rounded-xl text-xs"
-                      >
-                        إلغاء
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              )}
-
-              {/* Bottom 5-Icon Navigation Bar */}
               <div className="w-full bg-card border-t border-border py-1.5 px-3 flex items-center justify-around z-30 shrink-0 select-none">
-                {/* 1. History */}
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setActiveBottomTab("history")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-colors cursor-pointer ${
+                  className={`h-auto p-1.5 rounded-xl ${
                     activeBottomTab === "history"
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <IconRenderer name="history_outlined" className="w-5 h-5" />
-                </button>
+                </Button>
 
-                {/* 2. POS / Invoices */}
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setActiveBottomTab("pos")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-colors cursor-pointer ${
+                  className={`h-auto p-1.5 rounded-xl ${
                     activeBottomTab === "pos"
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   <IconRenderer name="checkout_outlined" className="w-5 h-5" />
-                </button>
+                </Button>
 
-                {/* 3. Home Icon (Returns to Launcher Screen) */}
-                <button
-                  onClick={handleGoHome}
-                  className="flex flex-col items-center justify-center p-1.5 rounded-xl transition-colors cursor-pointer text-muted-foreground hover:text-primary"
-                  title="الخروج إلى شاشة التطبيقات"
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setActiveBottomTab("home")}
+                  className={`h-auto p-1.5 rounded-xl ${
+                    activeBottomTab === "home"
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                 >
                   <IconRenderer name="home_outlined" className="w-5 h-5" />
-                </button>
+                </Button>
 
-                {/* 4. Stores Directory */}
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setActiveBottomTab("stores")}
-                  className={`flex flex-col items-center justify-center p-1.5 rounded-xl transition-colors cursor-pointer ${
+                  className={`h-auto p-1.5 rounded-xl ${
                     activeBottomTab === "stores"
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  <IconRenderer name="partners_outlined" className="w-5 h-5" />
-                </button>
+                  <IconRenderer
+                    name="chat_conversation_outlined"
+                    className="w-5 h-5"
+                  />
+                </Button>
 
-                {/* 5. Route / Map Icon (Active Blue Pill) */}
-                <button
+                <Button
                   onClick={() => setActiveBottomTab("map")}
-                  className={`px-4 py-1.5 rounded-2xl flex items-center justify-center transition-all cursor-pointer ${
+                  className={`h-auto px-4 py-1.5 rounded-2xl ${
                     activeBottomTab === "map"
-                      ? "bg-primary text-primary-foreground shadow-md shadow-primary/30"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "shadow-md shadow-primary/30"
+                      : "bg-transparent text-muted-foreground hover:bg-transparent hover:text-foreground shadow-none"
                   }`}
                 >
                   <IconRenderer name="map_outlined" className="w-5 h-5" />
-                </button>
+                </Button>
               </div>
             </div>
           )}
 
-          {/* Android Bottom Home Bar */}
-          <div
-            onClick={handleGoHome}
-            className="w-full h-4 bg-card hover:bg-muted flex items-center justify-center shrink-0 cursor-pointer transition-colors"
-            title="الرجوع للشاشة الرئيسية"
-          >
-            <div className="w-24 h-1 bg-border rounded-full" />
+          {storesListOpen && (
+            <div className="absolute inset-0 z-50 flex flex-col justify-end">
+              <div
+                className="absolute inset-0 bg-black/40 animate-in fade-in duration-200"
+                onClick={() => setStoresListOpen(false)}
+              />
+              <div className="relative bg-card rounded-t-3xl p-4 max-h-[75%] overflow-y-auto text-right animate-in slide-in-from-bottom-4 duration-200">
+                <div className="flex items-center justify-between mb-3 pb-2 border-b border-border">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setStoresListOpen(false)}
+                    className="h-auto w-auto p-1 text-muted-foreground hover:text-foreground"
+                  >
+                    <IconRenderer name="close_outlined" className="w-4 h-4" />
+                  </Button>
+                  <span className="font-extrabold text-sm text-foreground">
+                    جدول محلات {selectedDay} ({currentDayStores.length})
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  {currentDayStores.map((s, idx) => (
+                    <div
+                      key={s.id}
+                      onClick={() => {
+                        setSelectedStore(s);
+                        setStoresListOpen(false);
+                      }}
+                      className="p-3 bg-muted hover:bg-primary/10 rounded-xl border border-border flex items-center justify-between cursor-pointer transition-colors"
+                    >
+                      <span className="text-xs text-primary font-bold">
+                        عرض على الخريطة
+                      </span>
+                      <div className="text-right">
+                        <div className="flex items-center gap-1.5 justify-end">
+                          <span className="font-bold text-xs text-foreground">
+                            {s.name}
+                          </span>
+                          <span className="w-4 h-4 rounded-full bg-primary/15 text-primary text-[10px] font-black flex items-center justify-center">
+                            {idx + 1}
+                          </span>
+                        </div>
+                        <span className="text-[10px] text-muted-foreground">
+                          {s.address}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {addStoreModalOpen && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center p-4">
+              <div
+                className="absolute inset-0 bg-black/40 animate-in fade-in duration-200"
+                onClick={() => setAddStoreModalOpen(false)}
+              />
+              <div className="relative bg-card rounded-3xl p-4 w-full text-right animate-in zoom-in-95 duration-200">
+                <form onSubmit={handleAddStoreSubmit}>
+                  <div className="flex items-center justify-between mb-3 pb-2 border-b border-border">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      type="button"
+                      onClick={() => setAddStoreModalOpen(false)}
+                      className="h-auto w-auto p-1 text-muted-foreground hover:text-foreground"
+                    >
+                      <IconRenderer name="close_outlined" className="w-4 h-4" />
+                    </Button>
+                    <span className="font-bold text-xs text-foreground">
+                      إضافة عميل / سوبرماركت جديد
+                    </span>
+                  </div>
+
+                  <div className="space-y-2.5 text-xs">
+                    <div>
+                      <label className="block text-[11px] font-bold text-foreground mb-1">
+                        اسم المحل
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="مثال: أسواق العاصمة"
+                        value={newStoreName}
+                        onChange={(e) => setNewStoreName(e.target.value)}
+                        className="text-right rounded-xl"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-foreground mb-1">
+                        العنوان / الشارع
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="مثال: شارع طارق غسان"
+                        value={newStoreAddress}
+                        onChange={(e) => setNewStoreAddress(e.target.value)}
+                        className="text-right rounded-xl"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-2">
+                    <Button
+                      type="submit"
+                      className="flex-1 h-auto py-2 font-bold rounded-xl text-xs"
+                    >
+                      حفظ في خط سير {selectedDay}
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      onClick={() => setAddStoreModalOpen(false)}
+                      className="h-auto py-2 px-3 font-bold rounded-xl text-xs"
+                    >
+                      إلغاء
+                    </Button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          <div className="w-full h-9 bg-card border-t border-border flex items-center justify-around shrink-0 select-none">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleGoHome}
+              className="h-auto p-2 text-muted-foreground hover:text-foreground"
+              title="التطبيقات الأخيرة"
+            >
+              <div className="w-3.5 h-3.5 rounded-[3px] border-2 border-current" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleGoHome}
+              className="h-auto p-2 text-foreground hover:text-primary"
+              title="الشاشة الرئيسية"
+            >
+              <div className="w-4 h-4 rounded-full border-2 border-current" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleGoHome}
+              className="h-auto p-2 text-muted-foreground hover:text-foreground"
+              title="رجوع"
+            >
+              <div className="w-0 h-0 border-y-[6px] border-y-transparent border-r-[9px] border-r-current" />
+            </Button>
           </div>
         </div>
-      </div>
-
-      {/* Direct Interactive Hint */}
-      <div className="mt-3 text-center text-xs font-bold text-primary flex items-center gap-1.5">
-        {screenState === "launcher" ? (
-          <span>
-            انقر على أيقونة Tredro Rep داخل الهاتف لفتح الخريطة الميدانية
-          </span>
-        ) : (
-          <button
-            onClick={handleGoHome}
-            className="underline hover:text-foreground flex items-center gap-1"
-          >
-            <IconRenderer name="undo_outlined" className="w-3 h-3" />
-            <span>الرجوع إلى شاشة الهاتف الرئيسية</span>
-          </button>
-        )}
       </div>
     </div>
   );
 };
-
 export const RepPhoneInspectSection: React.FC = () => {
   return (
     <section
       id="rep-mobile-inspect"
-      className="py-16 sm:py-24 relative overflow-hidden border border-x"
+      className="py-16 sm:py-24 relative overflow-hidden border-y  "
     >
       <div className="absolute top-1/4 -right-40 w-96 h-96 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-info/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Clear Explanation of the Rep Mobile Application */}
           <div className="lg:col-span-7 space-y-6 text-right order-2 lg:order-1">
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
               تطبيق هاتف المندوب <br />
@@ -942,7 +1080,9 @@ export const RepPhoneInspectSection: React.FC = () => {
                   <IconRenderer name="location_filled" className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-extrabold mb-1">دقة تحديد الموقع عبر GPS</h4>
+                  <h4 className="font-extrabold mb-1">
+                    دقة تحديد الموقع عبر GPS
+                  </h4>
                   <p className=" text-xs">
                     زر واحد لتثبيت موقع المندوب فوراً، لمنع التلاعب وضمان صحة
                     الزيارات الميدانية.
@@ -981,7 +1121,6 @@ export const RepPhoneInspectSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Phone Simulator starting from Launcher */}
           <div className="lg:col-span-5 flex justify-center order-1 lg:order-2">
             <RepPhoneInspect />
           </div>

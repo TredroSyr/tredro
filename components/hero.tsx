@@ -34,13 +34,10 @@ export const HeroSection = () => {
           <div className="flex flex-col sm:flex-row  justify-center items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
             <Button
               onClick={handleCta}
-              className="w-full sm:w-auto h-auto  p-2 px-4   rounded-3xl active:scale-95 transition-all duration-200 flex  group"
+              className="p-6  flex justify-center   items-center rounded-3xl active:scale-95 transition-all duration-200   group"
             >
               <span>ابدأ تجربة Tredro مجاناً</span>
-              <IconRenderer
-                name="arrow-up-right"
-                className="w-12 h-12 group-hover:-translate-x-1 transition-transform"
-              />
+              <IconRenderer name="arrow-up-right" />
             </Button>
           </div>
 

@@ -5,6 +5,16 @@ import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 
+const THEME_INIT_SCRIPT = `
+(function () {
+  try {
+    var stored = localStorage.getItem("theme-storage");
+    var theme = stored ? JSON.parse(stored).state.theme : null;
+    if (theme === "dark") document.documentElement.classList.add("dark");
+  } catch (e) {}
+})();
+`;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -122,6 +132,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} ${thmanyahSans.variable}   antialiased`}
     >
       <body className=" flex flex-col font-thmanyah">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <Header />
         {children}
         {/* Structured Data */}
