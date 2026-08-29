@@ -1,12 +1,58 @@
+import { SVGProps } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { DASHBOARD_URL } from "@/components/header";
 
-const footerLinks = [
-  { label: "الشروط والأحكام", href: "#" },
-  { label: "سياسة الخصوصية", href: "#" },
-  { label: "أمان البيانات", href: "#" },
-  { label: "تواصل معنا", href: "#" },
+const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={2}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.5" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const appLinks = [
+  { label: "تحميل تطبيق المندوب", href: "#" },
+  { label: "لوحة التحكم", href: DASHBOARD_URL },
+  { label: "تطبيق العميل", href: "#" },
+];
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1Fm16LgfnH/",
+    icon: FacebookIcon,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/tredro_sy",
+    icon: InstagramIcon,
+  },
 ];
 
 const Footer = () => {
@@ -38,7 +84,7 @@ const Footer = () => {
               روابط سريعة
             </h3>
             <nav className="flex flex-col items-center md:items-start gap-2">
-              {footerLinks.map((link) => (
+              {appLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
@@ -48,6 +94,27 @@ const Footer = () => {
                 </Link>
               ))}
             </nav>
+          </div>
+
+          {/* Social */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h3 className="text-sm font-semibold text-card-foreground/90">
+              تابعنا
+            </h3>
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-background/60 text-muted-foreground transition-colors duration-200 hover:text-card-foreground"
+                >
+                  <social.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 

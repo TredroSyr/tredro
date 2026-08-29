@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { href: "/about", label: "من نحن" },
 ];
 
-const DASHBOARD_URL = "https://dashboard.tredro.online/";
+export const DASHBOARD_URL = "https://dashboard.tredro.online/";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

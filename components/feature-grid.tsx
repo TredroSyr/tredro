@@ -5,7 +5,6 @@ import { IconRenderer } from "@/assets/icons/iconRenderer";
 import type { iconName } from "@/assets/icons/iconRenderer/types";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft } from "lucide-react";
 
 interface GridCellProps {
   name: string;
@@ -42,7 +41,6 @@ export const FeatureGrid: React.FC<{
 }> = ({ onSelectFeature }) => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
-  // ---- Scroll affordance state ----
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -54,12 +52,6 @@ export const FeatureGrid: React.FC<{
     if (onSelectFeature) onSelectFeature(name);
   };
 
-  // Recompute which edges are reachable, so the fade masks only show
-  // where there's actually more content to reveal. The grid is RTL, so
-  // scrollLeft starts at 0 (showing the first/rightmost content) and
-  // moves negative as later content is revealed on the left — meaning
-  // "room left to scroll" (left mask) and "already scrolled past start"
-  // (right mask) are inverted from the usual LTR case.
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -83,8 +75,6 @@ export const FeatureGrid: React.FC<{
       updateScrollState();
     };
 
-    // Stop the auto-scroll the moment the user takes over — any touch,
-    // wheel, or pointer interaction on the scroll area counts.
     const stopAutoScroll = () => {
       hasUserScrolled.current = true;
       setShowHint(false);
@@ -97,8 +87,6 @@ export const FeatureGrid: React.FC<{
     const resizeObserver = new ResizeObserver(updateScrollState);
     resizeObserver.observe(el);
 
-    // Only bother with the hint/loop if the content actually overflows
-    // (i.e. we're on a small screen where the grid doesn't fit).
     const isOverflowing = el.scrollWidth > el.clientWidth + 4;
     let startTimeout: ReturnType<typeof setTimeout> | undefined;
     let loopTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -106,8 +94,6 @@ export const FeatureGrid: React.FC<{
     if (isOverflowing) {
       setShowHint(true);
 
-      // Keep gently nudging the grid back and forth until the user
-      // scrolls it themselves — a repeating hint rather than a one-off.
       const runNudge = () => {
         const node = scrollRef.current;
         if (hasUserScrolled.current || !node) return;
@@ -153,7 +139,6 @@ export const FeatureGrid: React.FC<{
       className="py-16 sm:py-24 bg-background border-t border-border overflow-hidden relative "
     >
       <div className="max-w-[1440px] mx-auto px-2 sm:px-4">
-        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
           <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
             جدول ميزات وأدوات منصة{" "}
@@ -167,102 +152,105 @@ export const FeatureGrid: React.FC<{
           </p>
         </div>
 
-        {/* Unified Periodic Grid Matrix Container with Left & Right Gradient Blur */}
         <div className="relative w-full">
-          {/* Left Edge Fade & Blur Mask — only visible once you've scrolled away from the start */}
           <div
-            className={`pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-32 md:w-44 bg-gradient-to-r from-background via-background/80 to-transparent backdrop-blur-[2px] z-20 transition-opacity duration-300 ${
+            className={`hidden lg:block pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-32 md:w-44 bg-gradient-to-r from-background via-background/80 to-transparent backdrop-blur-[2px] z-20 transition-opacity duration-300 ${
               canScrollLeft ? "opacity-100" : "opacity-0"
             }`}
           />
 
-          {/* Right Edge Fade & Blur Mask — only visible while there's more to scroll to */}
           <div
-            className={`pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-32 md:w-44 bg-gradient-to-l from-background via-background/80 to-transparent backdrop-blur-[2px] z-20 transition-opacity duration-300 ${
+            className={`hidden lg:block pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-32 md:w-44 bg-gradient-to-l from-background via-background/80 to-transparent backdrop-blur-[2px] z-20 transition-opacity duration-300 ${
               canScrollRight ? "opacity-100" : "opacity-0"
             }`}
           />
 
           <div
             ref={scrollRef}
-            className="relative w-full overflow-x-auto no-scrollbar rounded-3xl border border-border shadow-xs bg-card"
+            className="relative w-full lg:overflow-x-auto no-scrollbar rounded-3xl border border-border shadow-xs bg-card"
           >
-            {/* 10-Column Unified Grid */}
-            <div className="min-w-[1100px] grid grid-cols-10 border-l border-t border-border">
-              {/* ================= ROW 1 (10 Items) ================= */}
+            <div className="grid grid-cols-4 lg:min-w-[1100px] lg:grid-cols-10 border-l border-t border-border">
               <ToolCell
                 name="تتبع GPS لحظي"
                 icon="location_outlined"
+                className="order-[1] lg:order-none"
                 onClick={() => handleCellClick("تتبع GPS لحظي")}
               />
               <ToolCell
                 name="بحث متصل بالباركود"
                 icon="tag_outlined"
+                className="order-[2] lg:order-none"
                 onClick={() => handleCellClick("بحث متصل بالباركود")}
               />
               <ToolCell
                 name="مهام وزيارات اليوم"
                 icon="tick_outlined"
+                className="order-[3] lg:order-none"
                 onClick={() => handleCellClick("مهام وزيارات اليوم")}
               />
               <ToolCell
                 name="تخطيط مسار المندوب"
                 icon="map_outlined"
+                className="order-[4] lg:order-none"
                 onClick={() => handleCellClick("تخطيط مسار المندوب")}
               />
               <ToolCell
                 name="دليل المنتجات"
                 icon="book_outlined"
+                className="order-[5] lg:order-none"
                 onClick={() => handleCellClick("دليل المنتجات")}
               />
               <ToolCell
                 name="أوامر صوتية بالذكاء الاصطناعي"
                 icon="voice_outlined"
+                className="order-[6] lg:order-none"
                 onClick={() => handleCellClick("أوامر صوتية بالذكاء الاصطناعي")}
               />
               <ToolCell
                 name="جدول التوريد والتسليم"
                 icon="calendar_outlined"
+                className="order-[7] lg:order-none"
                 onClick={() => handleCellClick("جدول التوريد والتسليم")}
               />
               <ToolCell
                 name="معاينة الفواتير"
                 icon="eye_visible_outlined"
+                className="order-[8] lg:order-none"
                 onClick={() => handleCellClick("معاينة الفواتير")}
               />
               <ToolCell
                 name="أرصدة وحسابات الزبائن"
                 icon="contacts_outlined"
+                className="order-[9] lg:order-none"
                 onClick={() => handleCellClick("أرصدة وحسابات الزبائن")}
               />
               <ToolCell
                 name="قوالب الفواتير الضريبية"
                 icon="template_outlined"
+                className="order-[10] lg:order-none"
                 onClick={() => handleCellClick("قوالب الفواتير الضريبية")}
               />
 
-              {/* ================= ROW 2 & 3: LEFT (Cols 1-3) | CENTER 4-5 (REPS) | CENTER 6-7 (INVOICES) | RIGHT (Cols 8-10) ================= */}
-
-              {/* Row 2 - Left 3 cols */}
               <ToolCell
                 name="تنبيهات انخفاض المخزون"
                 icon="notification_outlined"
+                className="order-[11] lg:order-none"
                 onClick={() => handleCellClick("تنبيهات انخفاض المخزون")}
               />
               <ToolCell
                 name="تقارير الأرباح والمبيعات"
                 icon="assessments_outlined"
+                className="order-[12] lg:order-none"
                 onClick={() => handleCellClick("تقارير الأرباح والمبيعات")}
               />
               <ToolCell
                 name="الهدف الشهري للمبيعات"
                 icon="flag_outlined"
+                className="order-[13] lg:order-none"
                 onClick={() => handleCellClick("الهدف الشهري للمبيعات")}
               />
 
-              {/* Center Left Spotlight (Cols 4-5, Rows 2-3): REPS / PROJECTS */}
-              <div className="col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
-                {/* Mini Interactive Preview Graphic */}
+              <div className="order-[17] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
                 <div className="relative pt-2 pb-1">
                   <Card className="rounded-xl border-border shadow-xs p-3 max-w-[240px] mx-auto space-y-2">
                     <div className="flex items-center justify-between gap-1.5">
@@ -302,7 +290,6 @@ export const FeatureGrid: React.FC<{
                   </Card>
                 </div>
 
-                {/* Core Feature Title */}
                 <div className="flex items-center justify-center gap-2.5 pt-4">
                   <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-xs">
                     <IconRenderer name="bundle_filled" className="w-4 h-4" />
@@ -313,9 +300,7 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              {/* Center Right Spotlight (Cols 6-7, Rows 2-3): INVOICES / DOCS */}
-              <div className="col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
-                {/* Mini Interactive Preview Graphic */}
+              <div className="order-[18] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
                 <div className="relative pt-2 pb-1 flex justify-center">
                   <div className="relative w-full max-w-[240px]">
                     <Card className="rounded-xl border-border shadow-xs p-3.5 space-y-2">
@@ -342,7 +327,6 @@ export const FeatureGrid: React.FC<{
                   </div>
                 </div>
 
-                {/* Core Feature Title */}
                 <div className="flex items-center justify-center gap-2.5 pt-4">
                   <div className="w-7 h-7 rounded-lg bg-info flex items-center justify-center text-info-foreground shadow-xs">
                     <IconRenderer name="checkout_filled" className="w-4 h-4" />
@@ -353,27 +337,29 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              {/* Row 2 - Right 3 cols */}
               <ToolCell
                 name="توصيل فوري ومتابعة لحظية"
                 icon="rocket_outlined"
+                className="order-[14] lg:order-none"
                 onClick={() => handleCellClick("توصيل فوري ومتابعة لحظية")}
               />
               <ToolCell
                 name="حالات الطلبيات المخصصة"
                 icon="assign_outlined"
+                className="order-[15] lg:order-none"
                 onClick={() => handleCellClick("حالات الطلبيات المخصصة")}
               />
               <ToolCell
                 name="عروض الأسعار الآلية"
                 icon="edit_outlined"
+                className="order-[16] lg:order-none"
                 onClick={() => handleCellClick("عروض الأسعار الآلية")}
               />
 
-              {/* Row 3 - Left 3 cols */}
               <ToolCell
                 name="التكامل مع برامج المحاسبة عبر API"
                 icon="code_outlined"
+                className="order-[21] lg:order-none"
                 onClick={() =>
                   handleCellClick("التكامل مع برامج المحاسبة عبر API")
                 }
@@ -381,53 +367,55 @@ export const FeatureGrid: React.FC<{
               <ToolCell
                 name="محطات التوزيع المركزية"
                 icon="pin_outlined"
+                className="order-[22] lg:order-none"
                 onClick={() => handleCellClick("محطات التوزيع المركزية")}
               />
               <ToolCell
                 name="نماذج تسجيل المحلات"
                 icon="form_outlined"
+                className="order-[23] lg:order-none"
                 onClick={() => handleCellClick("نماذج تسجيل المحلات")}
               />
 
-              {/* Row 3 - Right 3 cols */}
               <ToolCell
                 name="أتمتة أوامر الشراء"
                 icon="bundle_outlined"
+                className="order-[24] lg:order-none"
                 onClick={() => handleCellClick("أتمتة أوامر الشراء")}
               />
               <ToolCell
                 name="حقول تسعير مخصصة"
                 icon="customize_outlined"
+                className="order-[25] lg:order-none"
                 onClick={() => handleCellClick("حقول تسعير مخصصة")}
               />
               <ToolCell
                 name="سجلات دوام المناديب"
                 icon="time_outlined"
+                className="order-[26] lg:order-none"
                 onClick={() => handleCellClick("سجلات دوام المناديب")}
               />
 
-              {/* ================= ROW 4 & 5: LEFT (Cols 1-3) | CENTER 4-5 (BRAIN) | CENTER 6-7 (CHAT) | RIGHT (Cols 8-10) ================= */}
-
-              {/* Row 4 - Left 3 cols */}
               <ToolCell
                 name="المساعد الذكي للأسئلة"
                 icon="faq_outlined"
+                className="order-[27] lg:order-none"
                 onClick={() => handleCellClick("المساعد الذكي للأسئلة")}
               />
               <ToolCell
                 name="أولوية توصيل البضاعة"
                 icon="level_outlined"
+                className="order-[28] lg:order-none"
                 onClick={() => handleCellClick("أولوية توصيل البضاعة")}
               />
               <ToolCell
                 name="حاسبة عمولات المبيعات"
                 icon="money_outlined"
+                className="order-[29] lg:order-none"
                 onClick={() => handleCellClick("حاسبة عمولات المبيعات")}
               />
 
-              {/* Center Left Spotlight (Cols 4-5, Rows 4-5): BRAIN */}
-              <div className="col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-primary/5 transition-colors text-right">
-                {/* Mini Interactive Preview Graphic */}
+              <div className="order-[19] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-primary/5 transition-colors text-right">
                 <div className="relative pt-2 pb-1 flex justify-center">
                   <div className="w-full max-w-[240px] space-y-2">
                     <div className="bg-primary/10 border border-primary/20 rounded-xl px-3 py-1.5 text-center shadow-2xs">
@@ -465,7 +453,6 @@ export const FeatureGrid: React.FC<{
                   </div>
                 </div>
 
-                {/* Core Feature Title */}
                 <div className="flex items-center justify-center gap-2.5 pt-4">
                   <Image
                     src="/tredro/logo.svg"
@@ -480,9 +467,7 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              {/* Center Right Spotlight (Cols 6-7, Rows 4-5): CHAT / ORDERS */}
-              <div className="col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
-                {/* Mini Interactive Preview Graphic */}
+              <div className="order-[20] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
                 <div className="relative pt-2 pb-1 flex justify-center">
                   <div className="w-full max-w-[240px] space-y-2">
                     <Card className="rounded-xl border-border shadow-xs p-2.5 space-y-2">
@@ -524,7 +509,6 @@ export const FeatureGrid: React.FC<{
                   </div>
                 </div>
 
-                {/* Core Feature Title */}
                 <div className="flex items-center justify-center gap-2.5 pt-4">
                   <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-xs">
                     <IconRenderer
@@ -538,106 +522,121 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              {/* Row 4 - Right 3 cols */}
               <ToolCell
                 name="تسجيلات تفقد الرفوف"
                 icon="video_outlined"
+                className="order-[30] lg:order-none"
                 onClick={() => handleCellClick("تسجيلات تفقد الرفوف")}
               />
               <ToolCell
                 name="لوحة التحكم الشاملة"
                 icon="dashbaord_outlined"
+                className="order-[31] lg:order-none"
                 onClick={() => handleCellClick("لوحة التحكم الشاملة")}
               />
               <ToolCell
                 name="صلاحيات وأمان الدخول"
                 icon="password_outlined"
+                className="order-[32] lg:order-none"
                 onClick={() => handleCellClick("صلاحيات وأمان الدخول")}
               />
 
-              {/* Row 5 - Left 3 cols */}
               <ToolCell
                 name="إشعارات المبيعات الفورية"
                 icon="mail_outlined"
+                className="order-[33] lg:order-none"
                 onClick={() => handleCellClick("إشعارات المبيعات الفورية")}
               />
               <ToolCell
                 name="لوحات مؤشرات الأداء (KPI)"
                 icon="overview_outlined"
+                className="order-[34] lg:order-none"
                 onClick={() => handleCellClick("لوحات مؤشرات الأداء (KPI)")}
               />
               <ToolCell
                 name="توقيت زيارات المحلات"
                 icon="hourglass_outlined"
+                className="order-[35] lg:order-none"
                 onClick={() => handleCellClick("توقيت زيارات المحلات")}
               />
 
-              {/* Row 5 - Right 3 cols */}
               <ToolCell
                 name="لوحة كانبان للطلبيات"
                 icon="column_outlined_three_column"
+                className="order-[36] lg:order-none"
                 onClick={() => handleCellClick("لوحة كانبان للطلبيات")}
               />
               <ToolCell
                 name="التكامل مع ERP والمستودعات"
                 icon="automation_outlined"
+                className="order-[37] lg:order-none"
                 onClick={() => handleCellClick("التكامل مع ERP والمستودعات")}
               />
               <ToolCell
                 name="حسابات الزبائن والسوبرماركت"
                 icon="add_user_outlined"
+                className="order-[38] lg:order-none"
                 onClick={() => handleCellClick("حسابات الزبائن والسوبرماركت")}
               />
 
-              {/* ================= ROW 6 (10 Items) ================= */}
               <ToolCell
                 name="تصنيفات المنتجات"
                 icon="category_outlined"
+                className="order-[39] lg:order-none"
                 onClick={() => handleCellClick("تصنيفات المنتجات")}
               />
               <ToolCell
                 name="دعم فني واستجابة 24/7"
                 icon="mobile_outlined"
+                className="order-[40] lg:order-none"
                 onClick={() => handleCellClick("دعم فني واستجابة 24/7")}
               />
               <ToolCell
                 name="قوائم فحص السيارات"
                 icon="list_outlined"
+                className="order-[41] lg:order-none"
                 onClick={() => handleCellClick("قوائم فحص السيارات")}
               />
               <ToolCell
                 name="جدولة خطوط السير"
                 icon="reschedule_outlined"
+                className="order-[42] lg:order-none"
                 onClick={() => handleCellClick("جدولة خطوط السير")}
               />
               <ToolCell
                 name="تصدير واستيراد إكسل"
                 icon="report_outlined"
+                className="order-[43] lg:order-none"
                 onClick={() => handleCellClick("تصدير واستيراد إكسل")}
               />
               <ToolCell
                 name="عروض تقديمية للشركات"
                 icon="screen_outlined"
+                className="order-[44] lg:order-none"
                 onClick={() => handleCellClick("عروض تقديمية للشركات")}
               />
               <ToolCell
                 name="مخططات غانت للتوزيع"
                 icon="list_view_outlined"
+                className="order-[45] lg:order-none"
                 onClick={() => handleCellClick("مخططات غانت للتوزيع")}
               />
               <ToolCell
                 name="خارطة طريق التوسع"
                 icon="map_outlined"
+                className="order-[46] lg:order-none"
                 onClick={() => handleCellClick("خارطة طريق التوسع")}
               />
               <ToolCell
                 name="صندوق الوارد والطلبيات"
                 icon="message_center_outlined"
+                className="order-[47] lg:order-none"
                 onClick={() => handleCellClick("صندوق الوارد والطلبيات")}
               />
               <ToolCell
                 name="فرق عمل المناديب"
                 icon="users_outlined"
+                className="order-[48] lg:order-none"
                 onClick={() => handleCellClick("فرق عمل المناديب")}
               />
             </div>
