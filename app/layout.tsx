@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://tredro.online";
+const SITE_URL = "https://www.tredro.online"; // ضيف www هون
 const SITE_NAME = "Tredro | ترادرو";
 const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبيات، والعملاء";
 const SITE_DESCRIPTION =
