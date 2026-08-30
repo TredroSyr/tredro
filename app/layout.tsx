@@ -5,6 +5,7 @@ import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import "leaflet/dist/leaflet.css";
+
 const THEME_INIT_SCRIPT = `
 (function () {
   try {
@@ -25,7 +26,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://www.tredro.online"; // ضيف www هون
+const SITE_URL = "https://www.tredro.online";
 const SITE_NAME = "Tredro | ترادرو";
 const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبيات، والعملاء";
 const SITE_DESCRIPTION =
@@ -109,18 +110,13 @@ export const metadata: Metadata = {
 
   manifest: "/site.webmanifest",
 
-  verification: {
-    google: "ضع_كود_Google_Search_Console_هون",
-    // other: { "facebook-domain-verification": "..." },
-  },
-
   category: "business",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f172a", // بدّلها للون هوية Tredro
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -129,9 +125,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="ar"
       dir="rtl"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${thmanyahSans.variable}   antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${thmanyahSans.variable} antialiased`}
     >
-      <body className=" flex flex-col font-thmanyah">
+      <body className="flex flex-col font-thmanyah">
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <Header />
         {children}
