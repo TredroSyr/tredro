@@ -45,10 +45,6 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --color-glass: var(--glass);
-  --color-glass-border: var(--glass-border);
-  --shadow-float: var(--shadow-float);
-  --shadow-sheet: var(--shadow-sheet);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -95,13 +91,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --glass: oklch(1 0 0 / 62%);
-  --glass-border: oklch(1 0 0 / 40%);
-  --shadow-float:
-    0 20px 45px -12px oklch(0.2 0.02 260 / 28%),
-    0 4px 10px -4px oklch(0.2 0.02 260 / 15%);
-  --shadow-sheet: 0 -10px 30px -8px oklch(0.2 0.02 260 / 22%);
-  --bottom-nav-height: 0px;
 }
 
 .dark {
@@ -140,12 +129,6 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --glass: oklch(0.22 0.02 258 / 65%);
-  --glass-border: oklch(1 0 0 / 12%);
-  --shadow-float:
-    0 20px 45px -12px oklch(0 0 0 / 55%),
-    0 4px 10px -4px oklch(0 0 0 / 35%);
-  --shadow-sheet: 0 -10px 30px -8px oklch(0 0 0 / 50%);
 }
 
 @layer base {
@@ -366,6 +349,35 @@
   }
 }
 
+@keyframes bellShake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30% {
+    transform: rotate(-12deg);
+  }
+  20%,
+  40% {
+    transform: rotate(12deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+  60% {
+    transform: rotate(6deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+}
+
+@utility animate-bell-shake {
+  transform-origin: top center;
+  animation: bellShake 2.5s ease-in-out infinite;
+}
+
 @keyframes roadDash {
   from {
     transform: translateX(0);
@@ -388,10 +400,6 @@
 .dark .map-surface .leaflet-control-attribution {
   color: oklch(0.72 0.03 257);
 }
-::view-transition-group(root) {
-  animation: none;
-}
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
