@@ -24,9 +24,7 @@ export const DASHBOARD_URL = "https://dashboard.tredro.online/";
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const theme = useThemeStore((state) => state.theme);
-  const hasHydrated = useThemeStore((state) => state.hasHydrated);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
+  const { theme, toggleTheme, hasHydrated } = useThemeStore();
   const isDark = hasHydrated && theme === "dark";
 
   const handleNavClick = (
@@ -109,14 +107,14 @@ export const Header = () => {
           >
             <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
               <Sun
-                className={`absolute h-4 w-4 transition-all duration-300 ${
+                className={`absolute h-4 w-4 text-primary transition-all duration-300 ${
                   isDark
                     ? "-rotate-90 scale-0 opacity-0"
                     : "rotate-0 scale-100 opacity-100"
                 }`}
               />
               <Moon
-                className={`absolute h-4 w-4 transition-all duration-300 ${
+                className={`absolute h-4 w-4 text-primary transition-all duration-300 ${
                   isDark
                     ? "rotate-0 scale-100 opacity-100"
                     : "rotate-90 scale-0 opacity-0"
@@ -151,14 +149,14 @@ export const Header = () => {
           >
             <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
               <Sun
-                className={`absolute h-4 w-4 transition-all duration-300 ${
+                className={`absolute h-4 w-4 text-primary transition-all duration-300 ${
                   isDark
                     ? "-rotate-90 scale-0 opacity-0"
                     : "rotate-0 scale-100 opacity-100"
                 }`}
               />
               <Moon
-                className={`absolute h-4 w-4 transition-all duration-300 ${
+                className={`absolute h-4 w-4 text-primary transition-all duration-300 ${
                   isDark
                     ? "rotate-0 scale-100 opacity-100"
                     : "rotate-90 scale-0 opacity-0"

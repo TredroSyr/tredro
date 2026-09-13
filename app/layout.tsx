@@ -7,13 +7,11 @@ import Footer from "@/components/footer";
 import "leaflet/dist/leaflet.css";
 
 const THEME_INIT_SCRIPT = `
-(function () {
   try {
-    var stored = localStorage.getItem("theme-storage");
-    var theme = stored ? JSON.parse(stored).state.theme : null;
-    if (theme === "dark") document.documentElement.classList.add("dark");
+    const stored = localStorage.getItem('theme-storage');
+    const theme = stored ? JSON.parse(stored).state.theme : 'light';
+    if (theme === 'dark') document.documentElement.classList.add('dark');
   } catch (e) {}
-})();
 `;
 
 const geistSans = Geist({
