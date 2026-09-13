@@ -134,8 +134,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${thmanyahSans.variable} antialiased`}
     >
-      <body className="flex flex-col font-thmanyah">
+      <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
+      <body className="flex flex-col font-thmanyah">
         <Header />
         {children}
         {/* Structured Data */}

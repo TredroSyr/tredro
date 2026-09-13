@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Moon, Sun } from "lucide-react";
 
 import { IconRenderer } from "@/assets/icons/iconRenderer";
 import { Button } from "@/components/ui/button";
@@ -26,8 +27,7 @@ export const Header = () => {
   const theme = useThemeStore((state) => state.theme);
   const hasHydrated = useThemeStore((state) => state.hasHydrated);
   const toggleTheme = useThemeStore((state) => state.toggleTheme);
-  const themeToggleIcon =
-    hasHydrated && theme === "dark" ? "morning_sun_outlined" : "moon_outlined";
+  const isDark = hasHydrated && theme === "dark";
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -107,7 +107,22 @@ export const Header = () => {
             aria-label="تبديل المظهر"
             className="rounded-full"
           >
-            <IconRenderer name={themeToggleIcon} />
+            <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
+              <Sun
+                className={`absolute h-4 w-4 transition-all duration-300 ${
+                  isDark
+                    ? "-rotate-90 scale-0 opacity-0"
+                    : "rotate-0 scale-100 opacity-100"
+                }`}
+              />
+              <Moon
+                className={`absolute h-4 w-4 transition-all duration-300 ${
+                  isDark
+                    ? "rotate-0 scale-100 opacity-100"
+                    : "rotate-90 scale-0 opacity-0"
+                }`}
+              />
+            </span>
           </Button>
         </div>
 
@@ -134,7 +149,22 @@ export const Header = () => {
             aria-label="تبديل المظهر"
             className="rounded-full"
           >
-            <IconRenderer name={themeToggleIcon} />
+            <span className="relative flex h-4 w-4 shrink-0 items-center justify-center">
+              <Sun
+                className={`absolute h-4 w-4 transition-all duration-300 ${
+                  isDark
+                    ? "-rotate-90 scale-0 opacity-0"
+                    : "rotate-0 scale-100 opacity-100"
+                }`}
+              />
+              <Moon
+                className={`absolute h-4 w-4 transition-all duration-300 ${
+                  isDark
+                    ? "rotate-0 scale-100 opacity-100"
+                    : "rotate-90 scale-0 opacity-0"
+                }`}
+              />
+            </span>
           </Button>
 
           <Button
