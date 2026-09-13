@@ -129,7 +129,7 @@ const AboutUs = () => {
             </Badge>
           </div>
 
-          <div className="max-w-3xl mx-auto text-center space-y-6 pt-4">
+          <div className="max-w-3xl mx-auto text-center space-y-6 pt-8">
             <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight leading-tight">
               مضاعفة كفاءة وإنتاجية سلاسل التوزيع
             </h2>
