@@ -7,7 +7,7 @@ import { WorkSprawlSection } from "@/components/work-sprawl-section";
 export default function HomePage() {
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -22,7 +22,7 @@ export default function HomePage() {
             ],
           }),
         }}
-      />
+      /> */}
       <HeroSection />
       <WorkSprawlSection />
       <RepPhoneInspectSection />
