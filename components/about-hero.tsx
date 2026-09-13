@@ -333,7 +333,7 @@ const AboutUs = () => {
           </div>
 
           {/* CTA block — now carries its own responsive background glow, matching the hero pattern */}
-          <div className="mt-16 text-center rounded-3xl p-8 sm:p-12 shadow-2xl border border-border relative overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground">
+          <div className="mt-16 !text-white text-center rounded-3xl p-8 sm:p-12 shadow-2xl border border-border relative overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/80 ">
             <div className="absolute -top-24 -right-24 w-72 h-72 sm:w-96 sm:h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-24 -left-24 w-72 h-72 sm:w-96 sm:h-96 bg-black/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -341,7 +341,7 @@ const AboutUs = () => {
               <h3 className="text-2xl sm:text-4xl font-black tracking-tight">
                 هل أنت مستعد لبدء تجربة توزيع أكثر كفاءة وإنتاجية؟
               </h3>
-              <p className="text-sm sm:text-base leading-relaxed font-medium text-primary-foreground/90">
+              <p className="text-sm sm:text-base leading-relaxed font-medium !text-white">
                 انضم اليوم إلى مئات الموردين والموزعين وأصحاب المتاجر الذين
                 يعتمدون على منصة Tredro في إدارة مبيعاتهم اليومية.
               </p>
@@ -359,7 +359,7 @@ const AboutUs = () => {
                   render={<Link href="/customer" />}
                   variant="outline"
                   size="lg"
-                  className="text-sm bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-white/10"
+                  className="text-sm bg-transparent border-primary-foreground/30 !text-white hover:bg-white/10"
                 >
                   <IconRenderer name="cart_outlined" />
                   <span>سجل كمتجر / سوبرماركت</span>
