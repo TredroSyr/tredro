@@ -169,88 +169,71 @@ export const FeatureGrid: React.FC<{
             ref={scrollRef}
             className="relative w-full lg:overflow-x-auto no-scrollbar rounded-3xl border border-border shadow-xs bg-card"
           >
-            <div className="grid grid-cols-4 lg:min-w-[1100px] lg:grid-cols-10 border-l border-t border-border">
-              <ToolCell
-                name="تتبع GPS لحظي"
-                icon="location_outlined"
-                className="order-[1] lg:order-none"
-                onClick={() => handleCellClick("تتبع GPS لحظي")}
-              />
-              <ToolCell
-                name="بحث متصل بالباركود"
-                icon="tag_outlined"
-                className="order-[2] lg:order-none"
-                onClick={() => handleCellClick("بحث متصل بالباركود")}
-              />
+            <div className="grid grid-cols-4 lg:min-w-[900px] lg:grid-cols-8 border-l border-t border-border">
               <ToolCell
                 name="مهام وزيارات اليوم"
                 icon="tick_outlined"
-                className="order-[3] lg:order-none"
+                className="order-[1] lg:order-none"
                 onClick={() => handleCellClick("مهام وزيارات اليوم")}
               />
               <ToolCell
                 name="تخطيط مسار المندوب"
                 icon="map_outlined"
-                className="order-[4] lg:order-none"
+                className="order-[2] lg:order-none"
                 onClick={() => handleCellClick("تخطيط مسار المندوب")}
               />
               <ToolCell
                 name="دليل المنتجات"
                 icon="book_outlined"
-                className="order-[5] lg:order-none"
+                className="order-[3] lg:order-none"
                 onClick={() => handleCellClick("دليل المنتجات")}
               />
-              <ToolCell
-                name="أوامر صوتية بالذكاء الاصطناعي"
-                icon="voice_outlined"
-                className="order-[6] lg:order-none"
-                onClick={() => handleCellClick("أوامر صوتية بالذكاء الاصطناعي")}
-              />
+
               <ToolCell
                 name="جدول التوريد والتسليم"
                 icon="calendar_outlined"
-                className="order-[7] lg:order-none"
+                className="order-[4] lg:order-none"
                 onClick={() => handleCellClick("جدول التوريد والتسليم")}
               />
               <ToolCell
                 name="معاينة الفواتير"
                 icon="eye_visible_outlined"
-                className="order-[8] lg:order-none"
+                className="order-[5] lg:order-none"
                 onClick={() => handleCellClick("معاينة الفواتير")}
               />
               <ToolCell
                 name="أرصدة وحسابات الزبائن"
                 icon="contacts_outlined"
-                className="order-[9] lg:order-none"
+                className="order-[6] lg:order-none"
                 onClick={() => handleCellClick("أرصدة وحسابات الزبائن")}
               />
               <ToolCell
-                name="قوالب الفواتير الضريبية"
-                icon="template_outlined"
-                className="order-[10] lg:order-none"
-                onClick={() => handleCellClick("قوالب الفواتير الضريبية")}
+                name="توصيل فوري ومتابعة لحظية"
+                icon="rocket_outlined"
+                className="order-[7] lg:order-none"
+                onClick={() => handleCellClick("توصيل فوري ومتابعة لحظية")}
+              />
+              <ToolCell
+                name="حالات الطلبيات المخصصة"
+                icon="assign_outlined"
+                className="order-[8] lg:order-none"
+                onClick={() => handleCellClick("حالات الطلبيات المخصصة")}
               />
 
               <ToolCell
-                name="تنبيهات انخفاض المخزون"
-                icon="notification_outlined"
+                name="نماذج تسجيل المحلات"
+                icon="form_outlined"
                 className="order-[11] lg:order-none"
-                onClick={() => handleCellClick("تنبيهات انخفاض المخزون")}
+                onClick={() => handleCellClick("نماذج تسجيل المحلات")}
               />
               <ToolCell
-                name="تقارير الأرباح والمبيعات"
-                icon="assessments_outlined"
+                name="حقول تسعير مخصصة"
+                icon="customize_outlined"
                 className="order-[12] lg:order-none"
-                onClick={() => handleCellClick("تقارير الأرباح والمبيعات")}
-              />
-              <ToolCell
-                name="الهدف الشهري للمبيعات"
-                icon="flag_outlined"
-                className="order-[13] lg:order-none"
-                onClick={() => handleCellClick("الهدف الشهري للمبيعات")}
+                onClick={() => handleCellClick("حقول تسعير مخصصة")}
               />
 
-              <div className="order-[17] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
+              <div className="order-[9] lg:order-none col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
                 <div className="relative pt-2 pb-1">
                   <Card className="rounded-xl border-border shadow-xs p-3 max-w-[240px] mx-auto space-y-2">
                     <div className="flex items-center justify-between gap-1.5">
@@ -300,122 +283,7 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              <div className="order-[18] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
-                <div className="relative pt-2 pb-1 flex justify-center">
-                  <div className="relative w-full max-w-[240px]">
-                    <Card className="rounded-xl border-border shadow-xs p-3.5 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-[11px] font-bold text-foreground flex items-center gap-1.5">
-                          <IconRenderer
-                            name="checkout_outlined"
-                            className="w-3.5 h-3.5 text-primary"
-                          />
-                          <span>فاتورة توريد #4810</span>
-                        </div>
-                        <div className="flex -space-x-1">
-                          <span className="w-4 h-4 rounded-full bg-primary text-[8px] text-primary-foreground flex items-center justify-center font-bold">
-                            معتمد
-                          </span>
-                        </div>
-                      </div>
-                      <div className="space-y-1 pt-1">
-                        <div className="h-1.5 bg-muted rounded-full w-full" />
-                        <div className="h-1.5 bg-muted rounded-full w-4/5" />
-                        <div className="h-1.5 bg-muted rounded-full w-3/5" />
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-2.5 pt-4">
-                  <div className="w-7 h-7 rounded-lg bg-info flex items-center justify-center text-info-foreground shadow-xs">
-                    <IconRenderer name="checkout_filled" className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
-                    الفواتير والمخزون
-                  </h3>
-                </div>
-              </div>
-
-              <ToolCell
-                name="توصيل فوري ومتابعة لحظية"
-                icon="rocket_outlined"
-                className="order-[14] lg:order-none"
-                onClick={() => handleCellClick("توصيل فوري ومتابعة لحظية")}
-              />
-              <ToolCell
-                name="حالات الطلبيات المخصصة"
-                icon="assign_outlined"
-                className="order-[15] lg:order-none"
-                onClick={() => handleCellClick("حالات الطلبيات المخصصة")}
-              />
-              <ToolCell
-                name="عروض الأسعار الآلية"
-                icon="edit_outlined"
-                className="order-[16] lg:order-none"
-                onClick={() => handleCellClick("عروض الأسعار الآلية")}
-              />
-
-              <ToolCell
-                name="التكامل مع برامج المحاسبة عبر API"
-                icon="code_outlined"
-                className="order-[21] lg:order-none"
-                onClick={() =>
-                  handleCellClick("التكامل مع برامج المحاسبة عبر API")
-                }
-              />
-              <ToolCell
-                name="محطات التوزيع المركزية"
-                icon="pin_outlined"
-                className="order-[22] lg:order-none"
-                onClick={() => handleCellClick("محطات التوزيع المركزية")}
-              />
-              <ToolCell
-                name="نماذج تسجيل المحلات"
-                icon="form_outlined"
-                className="order-[23] lg:order-none"
-                onClick={() => handleCellClick("نماذج تسجيل المحلات")}
-              />
-
-              <ToolCell
-                name="أتمتة أوامر الشراء"
-                icon="bundle_outlined"
-                className="order-[24] lg:order-none"
-                onClick={() => handleCellClick("أتمتة أوامر الشراء")}
-              />
-              <ToolCell
-                name="حقول تسعير مخصصة"
-                icon="customize_outlined"
-                className="order-[25] lg:order-none"
-                onClick={() => handleCellClick("حقول تسعير مخصصة")}
-              />
-              <ToolCell
-                name="سجلات دوام المناديب"
-                icon="time_outlined"
-                className="order-[26] lg:order-none"
-                onClick={() => handleCellClick("سجلات دوام المناديب")}
-              />
-
-              <ToolCell
-                name="المساعد الذكي للأسئلة"
-                icon="faq_outlined"
-                className="order-[27] lg:order-none"
-                onClick={() => handleCellClick("المساعد الذكي للأسئلة")}
-              />
-              <ToolCell
-                name="أولوية توصيل البضاعة"
-                icon="level_outlined"
-                className="order-[28] lg:order-none"
-                onClick={() => handleCellClick("أولوية توصيل البضاعة")}
-              />
-              <ToolCell
-                name="حاسبة عمولات المبيعات"
-                icon="money_outlined"
-                className="order-[29] lg:order-none"
-                onClick={() => handleCellClick("حاسبة عمولات المبيعات")}
-              />
-
-              <div className="order-[19] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-primary/5 transition-colors text-right">
+              <div className="order-[10] lg:order-none col-span-2 row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-primary/5 transition-colors text-right">
                 <div className="relative pt-2 pb-1 flex justify-center">
                   <div className="w-full max-w-[240px] space-y-2">
                     <div className="bg-primary/10 border border-primary/20 rounded-xl px-3 py-1.5 text-center shadow-2xs">
@@ -467,177 +335,92 @@ export const FeatureGrid: React.FC<{
                 </div>
               </div>
 
-              <div className="order-[20] lg:order-none col-span-2 lg:col-span-2 row-span-1 lg:row-span-2 bg-card border-r border-b border-border p-5 sm:p-6 flex flex-col justify-between relative group hover:bg-muted/40 transition-colors text-right">
-                <div className="relative pt-2 pb-1 flex justify-center">
-                  <div className="w-full max-w-[240px] space-y-2">
-                    <Card className="rounded-xl border-border shadow-xs p-2.5 space-y-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 rounded-full bg-info text-info-foreground text-[9px] font-bold flex items-center justify-center">
-                          سوبرماركت النخبة
-                        </div>
-                        <div className="h-2 bg-muted rounded-full w-28" />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[9px] font-bold flex items-center justify-center">
-                          المندوب سامر
-                        </div>
-                        <div className="h-2 bg-muted rounded-full w-20" />
-                      </div>
-                      <div className="flex items-center gap-1.5 pt-1 border-t border-border">
-                        <Badge
-                          variant="outline"
-                          className="h-auto gap-1 bg-primary/10 text-primary border-primary/20 text-[9px] font-bold px-1.5 py-0.5"
-                        >
-                          <IconRenderer
-                            name="cart_outlined"
-                            className="w-2.5 h-2.5"
-                          />
-                          طلب جديد
-                        </Badge>
-                        <Badge
-                          variant="outline"
-                          className="h-auto gap-1 bg-info/10 text-info border-info/20 text-[9px] font-bold px-1.5 py-0.5"
-                        >
-                          <IconRenderer
-                            name="whatsapp_outlined"
-                            className="w-2.5 h-2.5"
-                          />
-                          واتساب
-                        </Badge>
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-center gap-2.5 pt-4">
-                  <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-xs">
-                    <IconRenderer
-                      name="chat_conversation_filled"
-                      className="w-4 h-4"
-                    />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight">
-                    طلبيات المحلات
-                  </h3>
-                </div>
-              </div>
-
               <ToolCell
-                name="تسجيلات تفقد الرفوف"
-                icon="video_outlined"
-                className="order-[30] lg:order-none"
-                onClick={() => handleCellClick("تسجيلات تفقد الرفوف")}
+                name="سجلات دوام المناديب"
+                icon="time_outlined"
+                className="order-[13] lg:order-none"
+                onClick={() => handleCellClick("سجلات دوام المناديب")}
+              />
+              <ToolCell
+                name="أولوية توصيل البضاعة"
+                icon="level_outlined"
+                className="order-[14] lg:order-none"
+                onClick={() => handleCellClick("أولوية توصيل البضاعة")}
+              />
+              <ToolCell
+                name="صندوق الوارد والطلبيات"
+                icon="message_center_outlined"
+                className="order-[15] lg:order-none"
+                onClick={() => handleCellClick("صندوق الوارد والطلبيات")}
+              />
+              <ToolCell
+                name="فرق عمل المناديب"
+                icon="users_outlined"
+                className="order-[16] lg:order-none"
+                onClick={() => handleCellClick("فرق عمل المناديب")}
               />
               <ToolCell
                 name="لوحة التحكم الشاملة"
                 icon="dashbaord_outlined"
-                className="order-[31] lg:order-none"
+                className="order-[17] lg:order-none"
                 onClick={() => handleCellClick("لوحة التحكم الشاملة")}
               />
               <ToolCell
                 name="صلاحيات وأمان الدخول"
                 icon="password_outlined"
-                className="order-[32] lg:order-none"
+                className="order-[18] lg:order-none"
                 onClick={() => handleCellClick("صلاحيات وأمان الدخول")}
               />
 
               <ToolCell
                 name="إشعارات المبيعات الفورية"
                 icon="mail_outlined"
-                className="order-[33] lg:order-none"
+                className="order-[19] lg:order-none"
                 onClick={() => handleCellClick("إشعارات المبيعات الفورية")}
+              />
+              <ToolCell
+                name="الفواتير والمخزون"
+                icon="checkout_outlined"
+                className="order-[20] lg:order-none"
+                onClick={() => handleCellClick("الفواتير والمخزون")}
               />
               <ToolCell
                 name="لوحات مؤشرات الأداء (KPI)"
                 icon="overview_outlined"
-                className="order-[34] lg:order-none"
+                className="order-[21] lg:order-none"
                 onClick={() => handleCellClick("لوحات مؤشرات الأداء (KPI)")}
+              />
+              <ToolCell
+                name="طلبيات المحلات"
+                icon="chat_conversation_filled"
+                className="order-[22] lg:order-none"
+                onClick={() => handleCellClick("طلبيات المحلات")}
               />
               <ToolCell
                 name="توقيت زيارات المحلات"
                 icon="hourglass_outlined"
-                className="order-[35] lg:order-none"
+                className="order-[23] lg:order-none"
                 onClick={() => handleCellClick("توقيت زيارات المحلات")}
               />
 
               <ToolCell
-                name="لوحة كانبان للطلبيات"
-                icon="column_outlined_three_column"
-                className="order-[36] lg:order-none"
-                onClick={() => handleCellClick("لوحة كانبان للطلبيات")}
-              />
-              <ToolCell
-                name="التكامل مع ERP والمستودعات"
-                icon="automation_outlined"
-                className="order-[37] lg:order-none"
-                onClick={() => handleCellClick("التكامل مع ERP والمستودعات")}
-              />
-              <ToolCell
                 name="حسابات الزبائن والسوبرماركت"
                 icon="add_user_outlined"
-                className="order-[38] lg:order-none"
+                className="order-[24] lg:order-none"
                 onClick={() => handleCellClick("حسابات الزبائن والسوبرماركت")}
               />
 
               <ToolCell
                 name="تصنيفات المنتجات"
                 icon="category_outlined"
-                className="order-[39] lg:order-none"
+                className="order-[25] lg:order-none"
                 onClick={() => handleCellClick("تصنيفات المنتجات")}
               />
               <ToolCell
                 name="دعم فني واستجابة 24/7"
                 icon="mobile_outlined"
-                className="order-[40] lg:order-none"
+                className="order-[26] lg:order-none"
                 onClick={() => handleCellClick("دعم فني واستجابة 24/7")}
-              />
-              <ToolCell
-                name="قوائم فحص السيارات"
-                icon="list_outlined"
-                className="order-[41] lg:order-none"
-                onClick={() => handleCellClick("قوائم فحص السيارات")}
-              />
-              <ToolCell
-                name="جدولة خطوط السير"
-                icon="reschedule_outlined"
-                className="order-[42] lg:order-none"
-                onClick={() => handleCellClick("جدولة خطوط السير")}
-              />
-              <ToolCell
-                name="تصدير واستيراد إكسل"
-                icon="report_outlined"
-                className="order-[43] lg:order-none"
-                onClick={() => handleCellClick("تصدير واستيراد إكسل")}
-              />
-              <ToolCell
-                name="عروض تقديمية للشركات"
-                icon="screen_outlined"
-                className="order-[44] lg:order-none"
-                onClick={() => handleCellClick("عروض تقديمية للشركات")}
-              />
-              <ToolCell
-                name="مخططات غانت للتوزيع"
-                icon="list_view_outlined"
-                className="order-[45] lg:order-none"
-                onClick={() => handleCellClick("مخططات غانت للتوزيع")}
-              />
-              <ToolCell
-                name="خارطة طريق التوسع"
-                icon="map_outlined"
-                className="order-[46] lg:order-none"
-                onClick={() => handleCellClick("خارطة طريق التوسع")}
-              />
-              <ToolCell
-                name="صندوق الوارد والطلبيات"
-                icon="message_center_outlined"
-                className="order-[47] lg:order-none"
-                onClick={() => handleCellClick("صندوق الوارد والطلبيات")}
-              />
-              <ToolCell
-                name="فرق عمل المناديب"
-                icon="users_outlined"
-                className="order-[48] lg:order-none"
-                onClick={() => handleCellClick("فرق عمل المناديب")}
               />
             </div>
           </div>

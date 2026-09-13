@@ -30,7 +30,7 @@ const SITE_URL = "https://www.tredro.online";
 const SITE_NAME = "Tredro | ترادرو";
 const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبيات، والعملاء";
 const SITE_DESCRIPTION =
-  "منصة Tredro تربط الشركات بالمناديب والسوبرماركت ضمن دورة عمل واحدة: إدارة المناديب، متابعة الزيارات، إدارة الطلبيات والفواتير، وتطبيق خاص لأصحاب المحلات لطلب البضاعة مباشرة من الشركات.";
+  "منصة Tredro تربط الشركات بالمناديب والسوبرماركت ضمن دورة عمل واحدة: إدارة المناديب، متابعة الزيارات، إدارة الطلبيات والفواتير، وتطبيق خاص لأصحاب المحلات لطلب البضاعة مباشرة من الشركات. تخدم المنصة شركات التوزيع والمناديب في جميع المحافظات السورية، وتشمل حلب وطرطوس ودمشق واللاذقية وحمص.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -48,6 +48,13 @@ export const metadata: Metadata = {
     "rep app",
     "إدارة فواتير ومخزون",
     "Tredro",
+    "نظام مناديب في سوريا",
+    "توزيع في حلب",
+    "مناديب مبيعات في طرطوس",
+    "برنامج توزيع دمشق",
+    "sales rep app Syria",
+    "distribution software Aleppo",
+    "sales rep management Tartous",
   ],
   authors: [{ name: "Tredro" }],
   creator: "Tredro",
@@ -144,6 +151,32 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               description:
                 "منصة لإدارة المناديب وربطهم بالشركات والسوبرماركت لإدارة الطلبيات والفواتير والمخزون.",
               url: SITE_URL,
+              areaServed: [
+                {
+                  "@type": "Country",
+                  name: "Syria",
+                },
+                {
+                  "@type": "City",
+                  name: "Aleppo",
+                },
+                {
+                  "@type": "City",
+                  name: "Tartous",
+                },
+                {
+                  "@type": "City",
+                  name: "Damascus",
+                },
+                {
+                  "@type": "City",
+                  name: "Latakia",
+                },
+                {
+                  "@type": "City",
+                  name: "Homs",
+                },
+              ],
               offers: {
                 "@type": "Offer",
                 price: "0",

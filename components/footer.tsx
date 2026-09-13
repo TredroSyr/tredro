@@ -36,10 +36,28 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const appLinks = [
-  { label: "تحميل تطبيق المندوب", href: "#" },
+const MANDOUB_URL = "https://mandoub.tredro.online";
+const CUSTOMER_URL = "https://customer.tredro.online";
+
+const siteLinks = [
   { label: "لوحة التحكم", href: DASHBOARD_URL },
-  { label: "تطبيق العميل", href: "#" },
+  { label: "تطبيق المندوب", href: MANDOUB_URL },
+  { label: "تطبيق العميل", href: CUSTOMER_URL },
+];
+
+const downloadLinks = [
+  {
+    label: " لوحة التحكم",
+    href: "https://dashboard.tredro.online/download/tredro-dashboard.apk",
+  },
+  {
+    label: " تطبيق المندوب",
+    href: "https://mandoub.tredro.online/download/tredro-mandoub.apk",
+  },
+  {
+    label: " تطبيق العميل",
+    href: "https://customer.tredro.online/download/tredro-customer.apk",
+  },
 ];
 
 const socialLinks = [
@@ -62,7 +80,7 @@ const Footer = () => {
       <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-info/15 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-6 sm:py-10">
-        <div className="flex flex-col md:flex-row md:items-start items-center text-center md:text-start justify-between gap-8">
+        <div className="flex flex-col md:flex-row md:flex-wrap md:items-start items-center text-center md:text-start justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col items-center md:items-start gap-3 max-w-sm">
             <Image
@@ -84,10 +102,32 @@ const Footer = () => {
               روابط سريعة
             </h3>
             <nav className="flex flex-col items-center md:items-start gap-2">
-              {appLinks.map((link) => (
+              {siteLinks.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground transition-colors duration-200 hover:text-card-foreground"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Downloads */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h3 className="text-sm font-semibold text-card-foreground/90">
+              تحميل التطبيقات
+            </h3>
+            <nav className="flex flex-col items-center md:items-start gap-2">
+              {downloadLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm text-muted-foreground transition-colors duration-200 hover:text-card-foreground"
                 >
                   {link.label}

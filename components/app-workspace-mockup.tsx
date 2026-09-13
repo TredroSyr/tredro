@@ -216,7 +216,12 @@ export const AppWorkspaceMockup = () => {
   };
 
   const handleInstallApp = () => {
-    showToast("تم تثبيت تطبيق Tredro بنجاح على جهازك ✅");
+    window.open(
+      "https://dashboard.tredro.online/download/tredro-dashboard.apk",
+      "_blank",
+      "noopener,noreferrer",
+    );
+    showToast("جارِ تحميل تطبيق Tredro Dashboard ✅");
   };
 
   const handleCopyUrl = async () => {
