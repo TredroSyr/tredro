@@ -13,20 +13,27 @@ export const RepPhoneInspect: React.FC<{ className?: string }> = ({
   const [screenState, setScreenState] = useState<"launcher" | "splash" | "map">(
     "launcher",
   );
-  const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
+    setNow(new Date());
     const interval = setInterval(() => setNow(new Date()), 60000);
     return () => clearInterval(interval);
   }, []);
 
-  const statusBarTime = now.toLocaleTimeString("ar", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
-  const launcherDayName = now.toLocaleDateString("ar-SY", { weekday: "long" });
-  const launcherDayNum = now.getDate();
-  const launcherMonthName = now.toLocaleDateString("ar-SY", { month: "long" });
+  const statusBarTime = now
+    ? now.toLocaleTimeString("ar", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })
+    : "";
+  const launcherDayName = now
+    ? now.toLocaleDateString("ar-SY", { weekday: "long" })
+    : "";
+  const launcherDayNum = now ? now.getDate() : "";
+  const launcherMonthName = now
+    ? now.toLocaleDateString("ar-SY", { month: "long" })
+    : "";
 
   const handleLaunchApp = () => {
     setScreenState("splash");
