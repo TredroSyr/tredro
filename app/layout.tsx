@@ -5,6 +5,7 @@ import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
+import { WhatsappButton } from "@/components/whatsapp-button";
 import { GoogleAnalyticsGate } from "@/components/google-analytics-gate";
 import "leaflet/dist/leaflet.css";
 
@@ -245,6 +246,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
         <Footer />
+        <WhatsappButton />
         <CookieConsent />
       </body>
       <GoogleAnalyticsGate gaId="G-VV38CYJH53" />
