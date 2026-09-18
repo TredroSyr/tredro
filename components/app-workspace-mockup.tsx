@@ -15,7 +15,10 @@ type DashboardView =
   | "products"
   | "orders"
   | "invoices"
-  | "permissions";
+  | "warehouses"
+  | "stock-transfers"
+  | "roles"
+  | "notifications";
 
 const SECTION_IMAGE_SLUGS: Record<DashboardView, string> = {
   home: "home",
@@ -24,40 +27,79 @@ const SECTION_IMAGE_SLUGS: Record<DashboardView, string> = {
   products: "products",
   orders: "orders",
   invoices: "invoices",
-  permissions: "permissions",
+  warehouses: "warehouses",
+  "stock-transfers": "stock-transfers",
+  roles: "roles",
+  notifications: "notifications",
 };
 
 interface NavItemConfig {
   key: DashboardView;
   label: string;
   icon: iconName;
-  badge?: number;
-  tone?: "primary" | "muted";
+  activeIcon: iconName;
 }
 
 const NAV_ITEMS: NavItemConfig[] = [
-  { key: "home", label: "الرئيسية", icon: "home_outlined" },
-  { key: "reps", label: "المناديب", icon: "users_outlined", badge: 5 },
-  { key: "customers", label: "الزبائن", icon: "contacts_outlined", badge: 5 },
-  { key: "products", label: "المنتجات", icon: "category_outlined", badge: 8 },
+  {
+    key: "home",
+    label: "الرئيسية",
+    icon: "home_outlined",
+    activeIcon: "home_filled",
+  },
+  {
+    key: "reps",
+    label: "المناديب",
+    icon: "apps_outlined",
+    activeIcon: "apps_filled",
+  },
+  {
+    key: "customers",
+    label: "الزبائن",
+    icon: "users_outlined",
+    activeIcon: "users_filled",
+  },
+  {
+    key: "products",
+    label: "المنتجات",
+    icon: "bundle_outlined",
+    activeIcon: "bundle_filled",
+  },
   {
     key: "orders",
-    label: "الطلبيات",
-    icon: "card_outlined",
-    badge: 5,
-    tone: "muted",
+    label: "طلبات العملاء",
+    icon: "list_outlined",
+    activeIcon: "list_filled",
   },
   {
     key: "invoices",
-    label: "فواتير المستودع",
-    icon: "checkout_outlined",
-    badge: 4,
-    tone: "muted",
+    label: "الفواتير",
+    icon: "payment_outlined",
+    activeIcon: "payment_filled",
   },
   {
-    key: "permissions",
+    key: "warehouses",
+    label: "المستودعات",
+    icon: "folder_outlined",
+    activeIcon: "folder_filled",
+  },
+  {
+    key: "stock-transfers",
+    label: "طلبات المندوب",
+    icon: "list_outlined",
+    activeIcon: "list_filled",
+  },
+  {
+    key: "roles",
     label: "المستخدمون والصلاحيات",
     icon: "authorities_outlined",
+    activeIcon: "authorities_filled",
+  },
+  {
+    key: "notifications",
+    label: "الإشعارات",
+    icon: "notification_outlined",
+    activeIcon: "notification_filled",
   },
 ];
 
@@ -84,7 +126,7 @@ const NavButton = ({ item, isActive, onClick }: NavButtonProps) => {
       }`}
     >
       <IconRenderer
-        name={item.icon}
+        name={isActive ? item.activeIcon : item.icon}
         className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
           isActive ? "scale-110 text-primary" : "group-hover:scale-110"
         }`}
