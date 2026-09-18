@@ -16,6 +16,15 @@ const THEME_INIT_SCRIPT = `
   } catch (e) {}
 `;
 
+const COOKIE_CONSENT_INIT_SCRIPT = `
+  try {
+    const consent = localStorage.getItem('cookie_consent');
+    if (consent === 'granted' || consent === 'denied') {
+      document.documentElement.setAttribute('data-cookie-consent', 'known');
+    }
+  } catch (e) {}
+`;
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -159,6 +168,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script
+          dangerouslySetInnerHTML={{ __html: COOKIE_CONSENT_INIT_SCRIPT }}
+        />
       </head>
       <body className="flex flex-col font-thmanyah">
         <Header />

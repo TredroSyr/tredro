@@ -39,7 +39,10 @@ export function CookieConsent() {
 
   return (
     <>
-      <Card className="fixed inset-x-4 bottom-4 z-50 max-w-sm gap-4 rounded-2xl p-5 shadow-2xl sm:inset-x-auto sm:start-4">
+      <Card
+        id="cookie-consent-banner"
+        className="fixed inset-x-4 bottom-4 z-50 max-w-sm gap-4 rounded-2xl p-5 shadow-2xl sm:inset-x-auto sm:start-4"
+      >
         <div className="flex items-start gap-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Cookie className="size-5" />
