@@ -4,6 +4,8 @@ import "./globals.css";
 import { thmanyahSans } from "@/lib/fonts";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
+import { CookieConsent } from "@/components/cookie-consent";
+import { GoogleAnalyticsGate } from "@/components/google-analytics-gate";
 import "leaflet/dist/leaflet.css";
 
 const THEME_INIT_SCRIPT = `
@@ -231,7 +233,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
         <Footer />
+        <CookieConsent />
       </body>
+      <GoogleAnalyticsGate gaId="G-VV38CYJH53" />
     </html>
   );
 }
