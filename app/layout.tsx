@@ -25,10 +25,31 @@ const geistMono = Geist_Mono({
 });
 
 const SITE_URL = "https://www.tredro.online";
-const SITE_NAME = "Tredro | ترادرو";
+const SITE_NAME = "Tredro | تريدرو";
 const SITE_TITLE = "Tredro | إدارة مندوبي المبيعات، الطلبيات، والعملاء";
 const SITE_DESCRIPTION =
   "منصة Tredro تربط الشركات بالمناديب والسوبرماركت ضمن دورة عمل واحدة: إدارة المناديب، متابعة الزيارات، إدارة الطلبيات والفواتير، وتطبيق خاص لأصحاب المحلات لطلب البضاعة مباشرة من الشركات. تخدم المنصة شركات التوزيع والمناديب في جميع المحافظات السورية، وتشمل حلب وطرطوس ودمشق واللاذقية وحمص.";
+
+// Common English/Arabic misspellings of the brand, kept in one place so
+// they can feed both `keywords` and the JSON-LD `alternateName` list.
+const NAME_MISSPELLINGS_EN = [
+  "Tredor",
+  "Terdro",
+  "Tradro",
+  "Tredoo",
+  "Treadro",
+  "Tridro",
+  "Tedro",
+];
+const NAME_MISSPELLINGS_AR = [
+  "تريدور",
+  "تردرو",
+  "تريدرا",
+  "تريدروا",
+  "ترايدرو",
+  "تريدو",
+  "تردو",
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -53,6 +74,8 @@ export const metadata: Metadata = {
     "sales rep app Syria",
     "distribution software Aleppo",
     "sales rep management Tartous",
+    ...NAME_MISSPELLINGS_EN,
+    ...NAME_MISSPELLINGS_AR,
   ],
   authors: [{ name: "Tredro" }],
   creator: "Tredro",
@@ -144,8 +167,30 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Tredro",
+              alternateName: [
+                "تريدرو",
+                ...NAME_MISSPELLINGS_EN,
+                ...NAME_MISSPELLINGS_AR,
+              ],
+              url: SITE_URL,
+              logo: `${SITE_URL}/icon-512.png`,
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               name: "Tredro",
+              alternateName: [
+                "تريدرو",
+                ...NAME_MISSPELLINGS_EN,
+                ...NAME_MISSPELLINGS_AR,
+              ],
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web, Android, iOS",
               description:

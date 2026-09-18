@@ -346,6 +346,22 @@ export const RepPhoneInspectSection: React.FC = () => {
                   </p>
                 </div>
               </Card>
+
+              <Card className="p-4 rounded-2xl   flex-row items-start gap-3 sm:col-span-2">
+                <div className="w-8 h-8 rounded-xl bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                  <IconRenderer name="refresh_outlined" className="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 className="font-extrabold mb-1">
+                    وضع العمل بدون إنترنت
+                  </h4>
+                  <p className=" text-xs">
+                    يستمر المندوب بعمله حتى عند انقطاع الشبكة أو ضعف التغطية:
+                    خط السير، بيانات المحلات، والفواتير تُسجَّل محلياً على
+                    الجهاز، ثم تُزامَن تلقائياً فور عودة الاتصال بالإنترنت.
+                  </p>
+                </div>
+              </Card>
             </div>
           </div>
 
