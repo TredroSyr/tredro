@@ -165,9 +165,17 @@ const Footer = () => {
           <span className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} منصة Tredro. جميع الحقوق محفوظة.
           </span>
-          <span className="text-xs text-muted-foreground">
-            صُنع بعناية في سورية
-          </span>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/cookies"
+              className="text-xs text-muted-foreground transition-colors duration-200 hover:text-card-foreground"
+            >
+              سياسة ملفات تعريف الارتباط
+            </Link>
+            <span className="text-xs text-muted-foreground">
+              صُنع بعناية في سورية
+            </span>
+          </div>
         </div>
       </div>
     </footer>

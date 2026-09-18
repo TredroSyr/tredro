@@ -221,17 +221,6 @@ const SidebarInner = ({
         </button>
 
         <button
-          onClick={() => showToast("مركز مساعدة ودعم Tredro")}
-          className="flex w-full items-center justify-center gap-2.5 rounded-xl px-3 py-2.5 text-xs font-bold text-muted-foreground transition-all duration-200 hover:translate-x-1 hover:bg-primary/10 active:scale-[0.97] lg:justify-start"
-        >
-          <IconRenderer
-            name="help_outlined"
-            className="h-4 w-4 shrink-0 text-primary"
-          />
-          <span className="hidden lg:inline">المساعدة والمعلومات</span>
-        </button>
-
-        <button
           onClick={() => setLogoutOpen(true)}
           className="flex w-full items-center justify-center gap-2.5 rounded-xl px-3 py-2.5 text-xs font-bold text-destructive transition-all duration-200 hover:translate-x-1 hover:bg-destructive/10 active:scale-[0.97] lg:justify-start"
         >

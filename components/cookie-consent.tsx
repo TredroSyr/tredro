@@ -2,7 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { Cookie } from "lucide-react";
+import { Check, Cookie, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -63,7 +63,34 @@ export function CookieConsent() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div className="flex gap-2 sm:hidden">
+          <Button
+            variant="default"
+            size="icon"
+            aria-label="قبول الكل"
+            onClick={() => setConsent("granted")}
+          >
+            <Check />
+          </Button>
+          <Button
+            variant="secondary"
+            size="icon"
+            aria-label="رفض"
+            onClick={() => setConsent("denied")}
+          >
+            <X />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="إدارة التفضيلات"
+            onClick={() => setPreferencesOpen(true)}
+          >
+            <SlidersHorizontal />
+          </Button>
+        </div>
+
+        <div className="hidden gap-2 sm:grid sm:grid-cols-3">
           <Button
             variant="default"
             size="default"
