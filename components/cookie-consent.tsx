@@ -53,8 +53,8 @@ export function CookieConsent() {
             </h2>
             <p className="text-sm leading-relaxed text-muted-foreground">
               نستخدم ملفات تعريف الارتباط وتقنيات مشابهة لتحسين تجربتك على
-              الموقع وتحليل حركة الزيارات. بالنقر على &quot;قبول الكل&quot;
-              فإنك توافق على استخدامنا لملفات تعريف الارتباط. اطّلع على{" "}
+              الموقع وتحليل حركة الزيارات. بالنقر على &quot;قبول الكل&quot; فإنك
+              توافق على استخدامنا لملفات تعريف الارتباط. اطّلع على{" "}
               <Link
                 href="/cookies"
                 className="text-primary underline underline-offset-2 hover:text-primary/80"
@@ -69,10 +69,10 @@ export function CookieConsent() {
         <div className="flex gap-2 sm:hidden">
           <Button
             variant="default"
-            size="icon"
             aria-label="قبول الكل"
             onClick={() => setConsent("granted")}
           >
+            قبول الكل
             <Check />
           </Button>
           <Button
