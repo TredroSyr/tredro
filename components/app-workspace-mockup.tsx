@@ -7,6 +7,7 @@ import { IconRenderer } from "@/assets/icons/iconRenderer";
 import type { iconName } from "@/assets/icons/iconRenderer/types";
 import { useThemeStore } from "@/store/use-theme-store";
 import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 type DashboardView =
   | "home"
@@ -235,6 +236,32 @@ const SidebarInner = ({
   );
 };
 
+interface MockupImageProps {
+  src: string;
+  alt: string;
+  className: string;
+}
+
+const MockupImage = ({ src, alt, className }: MockupImageProps) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`absolute inset-0 ${className}`}>
+      {!loaded && <Skeleton className="absolute inset-0 rounded-none" />}
+      <Image
+        fill
+        sizes="(min-width: 1024px) 70vw, 100vw"
+        src={src}
+        alt={alt}
+        onLoad={() => setLoaded(true)}
+        className={`object-fill transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </div>
+  );
+};
+
 export const AppWorkspaceMockup = () => {
   const [activeTab, setActiveTab] = useState<DashboardView>("home");
   const [notification, setNotification] = useState<string | null>(null);
@@ -353,33 +380,25 @@ export const AppWorkspaceMockup = () => {
             key={activeTab}
             className="relative aspect-[780/1582] w-full animate-in fade-in overflow-hidden border-r border-border bg-white shadow-xs duration-200 lg:aspect-[1584/1000] dark:bg-[#0a0a0a]"
           >
-            <Image
-              fill
-              sizes="(min-width: 1024px) 70vw, 100vw"
+            <MockupImage
               src={`/phone/${imageSlug}-light.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="block object-fill lg:hidden dark:hidden"
+              className="block lg:hidden dark:hidden"
             />
-            <Image
-              fill
-              sizes="(min-width: 1024px) 70vw, 100vw"
+            <MockupImage
               src={`/phone/${imageSlug}-dark.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden object-fill dark:block dark:lg:hidden"
+              className="hidden dark:block dark:lg:hidden"
             />
-            <Image
-              fill
-              sizes="(min-width: 1024px) 70vw, 100vw"
+            <MockupImage
               src={`/dashborad/${imageSlug}-light.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden object-fill lg:block lg:dark:hidden"
+              className="hidden lg:block lg:dark:hidden"
             />
-            <Image
-              fill
-              sizes="(min-width: 1024px) 70vw, 100vw"
+            <MockupImage
               src={`/dashborad/${imageSlug}-dark.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden object-fill dark:lg:block"
+              className="hidden dark:lg:block"
             />
           </div>
         </main>
