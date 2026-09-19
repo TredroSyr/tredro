@@ -348,30 +348,38 @@ export const AppWorkspaceMockup = () => {
           />
         </div>
 
-        <main className="flex-1 ">
+        <main className="min-w-0 flex-1">
           <div
             key={activeTab}
-            className="h-full w-full animate-in fade-in overflow-hidden border-r border-border bg-muted shadow-xs duration-200"
+            className="relative aspect-[780/1582] w-full animate-in fade-in overflow-hidden border-r border-border bg-white shadow-xs duration-200 lg:aspect-[1584/1000] dark:bg-[#0a0a0a]"
           >
-            <img
+            <Image
+              fill
+              sizes="(min-width: 1024px) 70vw, 100vw"
               src={`/phone/${imageSlug}-light.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="block h-auto w-full object-cover lg:hidden dark:hidden"
+              className="block object-fill lg:hidden dark:hidden"
             />
-            <img
+            <Image
+              fill
+              sizes="(min-width: 1024px) 70vw, 100vw"
               src={`/phone/${imageSlug}-dark.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden h-auto w-full object-cover dark:block dark:lg:hidden"
+              className="hidden object-fill dark:block dark:lg:hidden"
             />
-            <img
+            <Image
+              fill
+              sizes="(min-width: 1024px) 70vw, 100vw"
               src={`/dashborad/${imageSlug}-light.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden h-auto w-full object-cover lg:block lg:dark:hidden"
+              className="hidden object-fill lg:block lg:dark:hidden"
             />
-            <img
+            <Image
+              fill
+              sizes="(min-width: 1024px) 70vw, 100vw"
               src={`/dashborad/${imageSlug}-dark.jpeg`}
               alt={SECTION_LABELS[activeTab]}
-              className="hidden h-auto w-full object-cover dark:lg:block"
+              className="hidden object-fill dark:lg:block"
             />
           </div>
         </main>

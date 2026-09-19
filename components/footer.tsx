@@ -38,6 +38,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const MANDOUB_URL = "https://mandoub.tredro.online";
 const CUSTOMER_URL = "https://customer.tredro.online";
+const CONTACT_EMAIL = "tredro.syr@gmail.com";
 
 const siteLinks = [
   { label: "لوحة التحكم", href: DASHBOARD_URL },
@@ -134,6 +135,20 @@ const Footer = () => {
                 </Link>
               ))}
             </nav>
+          </div>
+
+          {/* Contact */}
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <h3 className="text-sm font-semibold text-card-foreground/90">
+              تواصل معنا
+            </h3>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              dir="ltr"
+              className="text-sm text-muted-foreground transition-colors duration-200 hover:text-card-foreground"
+            >
+              {CONTACT_EMAIL}
+            </a>
           </div>
 
           {/* Social */}
