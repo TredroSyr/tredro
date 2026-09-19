@@ -194,7 +194,7 @@ const SidebarInner = ({
         ))}
       </div>
 
-      <div className="space-y-2 border-t border-border pt-3">
+      {/* <div className="space-y-2 border-t border-border pt-3">
         <button
           onClick={toggleTheme}
           className="flex w-full items-center justify-center gap-2.5 rounded-xl px-3 py-2.5 text-xs font-bold text-muted-foreground transition-all duration-200 hover:translate-x-1 hover:bg-primary/10 active:scale-[0.97] lg:justify-start"
@@ -230,7 +230,7 @@ const SidebarInner = ({
           />
           <span className="hidden lg:inline">تسجيل الخروج</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
