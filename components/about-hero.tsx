@@ -361,7 +361,7 @@ const AboutUs = () => {
                   size="lg"
                   className="text-sm bg-transparent border-primary-foreground/30 !text-white hover:bg-white/10"
                 >
-                  <IconRenderer name="cart_outlined" />
+                  <IconRenderer name="cart_outlined" className="text-white" />
                   <span>سجل كمتجر / سوبرماركت</span>
                 </Button>
               </div>
