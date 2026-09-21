@@ -275,7 +275,7 @@ export const AppWorkspaceMockup = () => {
 
   const handleInstallApp = () => {
     window.open(
-      "https://dashboard.tredro.online/download/tredro-dashboard.apk",
+      "https://q5xg2qnuesi8g3st.public.blob.vercel-storage.com/tredro-dashboard.apk",
       "_blank",
       "noopener,noreferrer",
     );

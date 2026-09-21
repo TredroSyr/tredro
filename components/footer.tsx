@@ -49,15 +49,15 @@ const siteLinks = [
 const downloadLinks = [
   {
     label: " لوحة التحكم",
-    href: "https://dashboard.tredro.online/download/tredro-dashboard.apk",
+    href: "https://q5xg2qnuesi8g3st.public.blob.vercel-storage.com/tredro-dashboard.apk",
   },
   {
     label: " تطبيق المندوب",
-    href: "https://mandoub.tredro.online/download/tredro-mandoub.apk",
+    href: "https://zyvf1dlacznk9vlz.public.blob.vercel-storage.com/tredro-mandoub.apk",
   },
   {
     label: " تطبيق العميل",
-    href: "https://customer.tredro.online/download/tredro-customer.apk",
+    href: "https://g7uxiqk5angfkrhm.public.blob.vercel-storage.com/tredro-customer.apk",
   },
 ];
 
