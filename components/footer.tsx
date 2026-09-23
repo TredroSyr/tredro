@@ -64,7 +64,7 @@ const downloadLinks = [
 const socialLinks = [
   {
     label: "Facebook",
-    href: "https://www.facebook.com/share/1Fm16LgfnH/",
+    href: "https://www.facebook.com/share/1N3gybbYH9/",
     icon: FacebookIcon,
   },
   {
