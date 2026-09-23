@@ -49,7 +49,7 @@ const siteLinks = [
 const downloadLinks = [
   {
     label: " لوحة التحكم",
-    href: "https://q5xg2qnuesi8g3st.public.blob.vercel-storage.com/tredro-dashboard.apk",
+    href: "https://q5xg2qnuesi8g3st.public.blob.vercel-storage.com/tredro-dashborad.apk",
   },
   {
     label: " تطبيق المندوب",
