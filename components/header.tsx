@@ -12,10 +12,10 @@ import { Button } from "@/components/ui/button";
 import { useThemeStore } from "@/store/use-theme-store";
 
 const NAV_ITEMS = [
-  { href: "/home", label: "الرئيسية" },
-  { href: "/home#work-sprawl", label: "التحديات" },
-  { href: "/home#rep-mobile-inspect", label: "تطبيق المندوب" },
-  { href: "/home#product", label: "المزايا" },
+  { href: "/", label: "الرئيسية" },
+  { href: "/#work-sprawl", label: "التحديات" },
+  { href: "/#rep-mobile-inspect", label: "تطبيق المندوب" },
+  { href: "/#product", label: "المزايا" },
   { href: "/about", label: "من نحن" },
 ];
 
@@ -32,7 +32,7 @@ export const Header = () => {
     href: string,
   ) => {
     const [path, hash] = href.split("#");
-    if (hash && path === "/home" && pathname === "/home") {
+    if (hash && path === "/" && pathname === "/") {
       event.preventDefault();
       document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
     }
@@ -46,7 +46,7 @@ export const Header = () => {
       <nav className="relative z-10 mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full border border-border/60 bg-background/60 px-4 shadow-lg shadow-black/5 backdrop-blur-[90px] backdrop-saturate-200 dark:border-border/40 dark:bg-background/40 sm:h-20 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6 sm:gap-8">
           <Link
-            href="/home"
+            href="/"
             className="flex items-center focus:outline-none"
             aria-label="Tredro Home"
           >
