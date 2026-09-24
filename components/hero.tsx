@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const HeroSection = () => {
   const handleCta = () => {
-    document.querySelector("#product")?.scrollIntoView({ behavior: "smooth" });
+    window.open("https://dashboard.tredro.online/", "_blank", "noopener,noreferrer");
   };
 
   const handleScrollToBrain = () => {
