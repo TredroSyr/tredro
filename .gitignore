@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# images (keep site assets in /public)
+*.png
+*.jpg
+*.jpeg
+*.webp
+!/public/**
