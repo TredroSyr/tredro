@@ -289,6 +289,10 @@ export const weakPoints: Lecture = {
           type: "note",
           text: "**خلاصة**: بالتعادل **ما في قاعدة إلزامية**؛ المهم تحط `*`، وتعرف إن الخطأ = **نصف عدد سجلات القيمة**، وإن الاختيار ما بيغيّر النتيجة.",
         },
+        {
+          type: "p",
+          text: "بالدورات الموجودة عندنا ما إجا سؤال تعادل مباشر، بس أسئلة 1R الحقيقية موجودة بتبويب **«من الدورات»**، والتعادل مطبّق بالمثال 2 بتبويب **«أمثلة امتحانية»**.",
+        },
       ],
     },
 
@@ -832,6 +836,43 @@ export const weakPoints: Lecture = {
         },
       ],
       answer: "Monthly ← ورقة No مباشرة. Yearly ← تقسيم حسب Support",
+    },
+  ],
+  fromExams: [
+    {
+      title: "تنبؤية ووصفية",
+      refs: [
+        { exam: "2025-2", questions: [30] },
+        { exam: "review-1", questions: [1, 2] },
+      ],
+    },
+    {
+      title: "الاختصارات",
+      refs: [
+        { exam: "2025-2", questions: [15, 18, 31, 32] },
+        { exam: "2026-b", questions: [12] },
+        { exam: "review-1", questions: [13, 35] },
+      ],
+    },
+    {
+      title: "1R",
+      refs: [
+        { exam: "2025-2", questions: [6, 7] },
+        { exam: "2026-b", questions: [35] },
+        { exam: "review-1", questions: [11, 17, 18, 19] },
+      ],
+    },
+    {
+      title: "Hunt",
+      refs: [{ exam: "2026-b", questions: [26, 28] }],
+    },
+    {
+      title: "Information Gain",
+      refs: [
+        { exam: "2025-2", questions: [1, 2, 3, 4] },
+        { exam: "2026-b", questions: [32, 34] },
+        { exam: "review-1", questions: [7, 12, 20, 21] },
+      ],
     },
   ],
 };

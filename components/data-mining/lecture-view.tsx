@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   BookOpen,
   Calculator,
@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Circle,
   CircleCheck,
+  ClipboardCheck,
   ListChecks,
   PenLine,
 } from "lucide-react";
@@ -21,14 +22,25 @@ const TABS = [
   { id: "laws", label: "قوانين واختصارات", short: "القوانين", icon: Calculator },
   { id: "mcq", label: "MCQ", short: "MCQ", icon: ListChecks },
   { id: "exercises", label: "أمثلة امتحانية", short: "أمثلة", icon: PenLine },
+  { id: "exams", label: "من الدورات", short: "الدورات", icon: ClipboardCheck },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
 
-export function LectureView({ lecture }: { lecture: Lecture }) {
+// `examPractice` fills the "من الدورات" tab; the page renders it so the
+// exam data stays out of this component.
+export function LectureView({
+  lecture,
+  examPractice,
+}: {
+  lecture: Lecture;
+  examPractice?: ReactNode;
+}) {
   const [tab, setTab] = useState<TabId>("study");
   const tabs = TABS.filter(
-    (t) => t.id !== "exercises" || (lecture.exercises?.length ?? 0) > 0,
+    (t) =>
+      (t.id !== "exercises" || (lecture.exercises?.length ?? 0) > 0) &&
+      (t.id !== "exams" || examPractice),
   );
 
   return (
@@ -66,6 +78,7 @@ export function LectureView({ lecture }: { lecture: Lecture }) {
       {tab === "exercises" && lecture.exercises && (
         <ExercisesTab exercises={lecture.exercises} />
       )}
+      {tab === "exams" && examPractice}
     </div>
   );
 }

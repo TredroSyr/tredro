@@ -11,7 +11,7 @@ import {
   RotateCcw,
   X,
 } from "lucide-react";
-import type { Exam, ExamQuestion } from "@/lib/data-mining/types";
+import type { Exam, ExamQuestion, ExamTopicSet } from "@/lib/data-mining/types";
 import { BlockView } from "./lecture-view";
 import { RichText } from "./rich-text";
 
@@ -133,6 +133,97 @@ function StudyCard({ question: q }: { question: ExamQuestion }) {
     <QuestionCard question={q}>
       <Options question={q} picked={null} reveal />
       <Solution question={q} />
+    </QuestionCard>
+  );
+}
+
+// ───────────────────────── Past questions by topic ─────────────────────────
+
+// Real exam questions grouped by topic: answer first, then the solution shows.
+export function ExamPractice({
+  topics,
+  lectureTitles,
+}: {
+  topics: ExamTopicSet[];
+  lectureTitles: Record<number, string>;
+}) {
+  const [filter, setFilter] = useState<number | null>(null);
+  const count = (t: ExamTopicSet) =>
+    t.exams.reduce((sum, e) => sum + e.questions.length, 0);
+
+  return (
+    <TitlesContext value={lectureTitles}>
+      <div className="space-y-6">
+        <p className="rounded-2xl border border-border bg-muted/40 px-5 py-4 leading-8 text-muted-foreground">
+          أسئلة حقيقية من الدورات السابقة على كل موضوع، مع جداولها. اختر جوابك أولاً
+          وبعدها يظهر الحل والشرح.
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          <FilterChip active={filter === null} onClick={() => setFilter(null)}>
+            الكل ({topics.reduce((sum, t) => sum + count(t), 0)})
+          </FilterChip>
+          {topics.map((t, i) => (
+            <FilterChip key={i} active={filter === i} onClick={() => setFilter(i)}>
+              {t.title} ({count(t)})
+            </FilterChip>
+          ))}
+        </div>
+
+        {topics.map((topic, i) =>
+          filter !== null && filter !== i ? null : (
+            <section key={i} className="space-y-5">
+              <h2 className="border-b border-border pb-2 text-xl font-bold">
+                {topic.title}
+              </h2>
+              {topic.exams.map((exam) => (
+                <div key={exam.slug} className="space-y-5">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+                    <ClipboardCheck className="size-4" />
+                    <Link href={`/data-mining/exams/${exam.slug}`} className="hover:text-primary">
+                      {exam.title}
+                    </Link>
+                  </p>
+                  <QuestionList exam={exam} questions={exam.questions}>
+                    {(q) => <PracticeCard question={q} />}
+                  </QuestionList>
+                </div>
+              ))}
+            </section>
+          ),
+        )}
+      </div>
+    </TitlesContext>
+  );
+}
+
+function PracticeCard({ question: q }: { question: ExamQuestion }) {
+  // -1 = revealed without answering.
+  const [picked, setPicked] = useState<number | null>(null);
+  const answered = picked !== null;
+  return (
+    <QuestionCard
+      question={q}
+      status={
+        !answered || picked === -1 ? undefined : picked === q.answer ? "right" : "wrong"
+      }
+    >
+      <Options
+        question={q}
+        picked={picked}
+        reveal={answered}
+        onPick={answered ? undefined : setPicked}
+      />
+      {answered ? (
+        <Solution question={q} />
+      ) : (
+        <button
+          onClick={() => setPicked(-1)}
+          className="mt-4 text-sm text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+        >
+          ما بعرف، أظهر الحل
+        </button>
+      )}
     </QuestionCard>
   );
 }

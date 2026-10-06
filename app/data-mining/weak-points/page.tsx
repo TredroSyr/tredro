@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { lectures } from "@/lib/data-mining";
+import { resolveExamTopics } from "@/lib/data-mining/exams";
 import { weakPoints } from "@/lib/data-mining/weak-points";
 import { LectureView } from "@/components/data-mining/lecture-view";
+import { ExamPractice } from "@/components/data-mining/exam-view";
 
 export const metadata: Metadata = { title: weakPoints.title };
 
 export default function WeakPointsPage() {
+  const lectureTitles = Object.fromEntries(lectures.map((l) => [l.n, l.title]));
+
   return (
     <>
       <Link
@@ -27,7 +32,17 @@ export default function WeakPointsPage() {
         <p className="mt-3 leading-8 text-muted-foreground">{weakPoints.summary}</p>
       </header>
 
-      <LectureView lecture={weakPoints} />
+      <LectureView
+        lecture={weakPoints}
+        examPractice={
+          weakPoints.fromExams && (
+            <ExamPractice
+              topics={resolveExamTopics(weakPoints.fromExams)}
+              lectureTitles={lectureTitles}
+            />
+          )
+        }
+      />
     </>
   );
 }

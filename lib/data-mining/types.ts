@@ -67,6 +67,19 @@ export type Exam = {
   questions: ExamQuestion[];
 };
 
+// Past-exam questions on one topic, by exam slug and question number.
+export type ExamTopic = {
+  title: string;
+  refs: { exam: string; questions: number[] }[];
+};
+
+// An ExamTopic resolved to exams trimmed to the referenced questions
+// (and the contexts they use).
+export type ExamTopicSet = {
+  title: string;
+  exams: Exam[];
+};
+
 export type Lecture = {
   n: number;
   title: string;
@@ -77,4 +90,5 @@ export type Lecture = {
   shortcuts: string[];
   mcq: Mcq[];
   exercises?: Exercise[];
+  fromExams?: ExamTopic[];
 };
