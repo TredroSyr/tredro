@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ChevronLeft, ClipboardCheck, Lock } from "lucide-react";
+import { ChevronLeft, ClipboardCheck, Lock, Target } from "lucide-react";
 import { TOTAL_LECTURES, getLecture } from "@/lib/data-mining";
+import { weakPoints } from "@/lib/data-mining/weak-points";
 import { LectureProgress } from "@/components/data-mining/lecture-progress";
 
 export default function DataMiningPage() {
@@ -21,7 +22,7 @@ export default function DataMiningPage() {
 
       <Link
         href="/data-mining/exams"
-        className="group mb-8 flex items-center gap-4 rounded-2xl border-2 border-primary/40 bg-primary/5 px-5 py-4 shadow-sm transition-colors hover:border-primary"
+        className="group mb-3 flex items-center gap-4 rounded-2xl border-2 border-primary/40 bg-primary/5 px-5 py-4 shadow-sm transition-colors hover:border-primary"
       >
         <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
           <ClipboardCheck className="size-5" />
@@ -32,6 +33,23 @@ export default function DataMiningPage() {
             امتحانات سابقة بوضع دراسة (الحل مع الشرح) ووضع اختبار
           </span>
         </span>
+        <ChevronLeft className="size-5 text-muted-foreground transition-transform group-hover:-translate-x-1" />
+      </Link>
+
+      <Link
+        href="/data-mining/weak-points"
+        className="group mb-8 flex items-center gap-4 rounded-2xl border-2 border-amber-500/40 bg-amber-500/5 px-5 py-4 shadow-sm transition-colors hover:border-amber-500"
+      >
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-amber-500 text-white">
+          <Target className="size-5" />
+        </span>
+        <span className="flex-1">
+          <span className="block font-bold">{weakPoints.title}</span>
+          <span className="mt-1 block text-sm leading-6 text-muted-foreground">
+            تنبؤية ووصفية · الاختصارات · التعادل في 1R · Hunt · Information Gain
+          </span>
+        </span>
+        <LectureProgress n={weakPoints.n} total={weakPoints.ideas.length} />
         <ChevronLeft className="size-5 text-muted-foreground transition-transform group-hover:-translate-x-1" />
       </Link>
 
