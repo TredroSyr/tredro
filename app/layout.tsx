@@ -6,7 +6,6 @@ import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { CookieConsent } from "@/components/cookie-consent";
 import { WhatsappButton } from "@/components/whatsapp-button";
-import { HideOnPath } from "@/components/hide-on-path";
 import { GoogleAnalyticsGate } from "@/components/google-analytics-gate";
 import "leaflet/dist/leaflet.css";
 
@@ -175,9 +174,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex flex-col font-thmanyah">
-        <HideOnPath prefix="/data-mining">
-          <Header />
-        </HideOnPath>
+        <Header />
         {children}
         {/* Structured Data */}
         <script
@@ -248,10 +245,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             }),
           }}
         />
-        <HideOnPath prefix="/data-mining">
-          <Footer />
-          <WhatsappButton />
-        </HideOnPath>
+        <Footer />
+        <WhatsappButton />
         <CookieConsent />
       </body>
       <GoogleAnalyticsGate gaId="G-VV38CYJH53" />
