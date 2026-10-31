@@ -19,7 +19,7 @@ const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
+export const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -38,6 +38,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
 
 const MANDOUB_URL = "https://mandoub.tredro.online";
 export const CUSTOMER_URL = "https://customer.tredro.online";
+export const INSTAGRAM_URL = "https://www.instagram.com/tredro_sy";
 const CONTACT_EMAIL = "tredro.syr@gmail.com";
 
 const siteLinks = [
@@ -69,7 +70,7 @@ const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/tredro_sy",
+    href: INSTAGRAM_URL,
     icon: InstagramIcon,
   },
 ];
