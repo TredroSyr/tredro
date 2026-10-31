@@ -1,69 +1,156 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import Image from "next/image";
 import { InstagramIcon, INSTAGRAM_URL } from "@/components/footer";
 
-// Paste reel links as copied from Instagram ("Share" → "Copy link").
-const REEL_URLS: string[] = [
-  "https://www.instagram.com/p/DfHE3TMqeR8/",
-  "https://www.instagram.com/p/DdrgI7mpQEX/",
-  "https://www.instagram.com/p/DeT3hSyq_nH/",
-  "https://www.instagram.com/p/Dd1tN1Lq97x/",
+type Reel = {
+  code: string;
+  title: string;
+  // Optional self-hosted clip, e.g. "/reels/<code>.mp4". Without it the card
+  // opens the reel on Instagram instead of playing inline.
+  video?: string;
+};
+
+// Thumbnails live in public/reels/<code>.jpg.
+const REELS: Reel[] = [
+  { code: "DfHE3TMqeR8", title: "مندوبك هلّق وين؟ Tredro بيقلّك بالضبط" },
+  { code: "DdrgI7mpQEX", title: "من الورقة والقلم إلى طلبية ذكية" },
+  { code: "DeT3hSyq_nH", title: "المرتجع من الزبون لحد مستودع الشركة" },
+  { code: "Dd1tN1Lq97x", title: "المندوب بيطلب البضاعة من جواله" },
 ];
 
-const getReelCode = (url: string) =>
-  url.match(/instagram\.com\/(?:reel|reels|p)\/([\w-]+)/)?.[1] ?? null;
+const CARD_TILTS = ["-rotate-2", "rotate-[1.5deg]", "-rotate-1", "rotate-2"];
+const TAPE_TILTS = ["-rotate-3", "rotate-2", "-rotate-2", "rotate-3"];
 
-const ReelCard: React.FC<{ code: string; index: number }> = ({
-  code,
+const reelUrl = (code: string) => `https://www.instagram.com/p/${code}/`;
+
+const PlayIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="h-5 w-5 translate-x-0.5"
+    aria-hidden="true"
+  >
+    <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11-6.86a1 1 0 0 0 0-1.7l-11-6.86A1 1 0 0 0 8 5.14z" />
+  </svg>
+);
+
+const ReelCard: React.FC<{ reel: Reel; index: number }> = ({
+  reel,
   index,
 }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const poster = `/reels/${reel.code}.jpg`;
 
-  return (
-    <div className="relative aspect-[9/16] w-[260px] sm:w-auto shrink-0 snap-center overflow-hidden rounded-3xl border border-border bg-muted shadow-xl">
-      {isPlaying ? (
-        <iframe
-          className="absolute inset-0 h-full w-full"
-          src={`https://www.instagram.com/p/${code}/embed/`}
-          title={`ريل Tredro رقم ${index + 1}`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
+  const play = () => {
+    videoRef.current?.play().then(() => setIsPlaying(true), () => {});
+  };
+  const pause = () => {
+    videoRef.current?.pause();
+    setIsPlaying(false);
+  };
+
+  const media = (
+    <>
+      {reel.video ? (
+        <video
+          ref={videoRef}
+          src={reel.video}
+          poster={poster}
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       ) : (
+        <Image
+          src={poster}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 260px, 66vw"
+          className="object-cover"
+        />
+      )}
+      <span
+        className={`absolute inset-0 grid place-items-center transition-opacity duration-200 ${
+          isPlaying ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        <span className="grid h-12 w-12 place-items-center rounded-full bg-white/90 text-neutral-900 shadow-lg transition-transform duration-200 group-hover:scale-110">
+          <PlayIcon />
+        </span>
+      </span>
+      <span className="absolute bottom-2.5 left-2.5 rounded bg-black/70 px-2 py-1 font-mono text-[11px] tracking-wider text-white">
+        INSTAGRAM
+      </span>
+    </>
+  );
+
+  const mediaClass =
+    "group relative block aspect-[9/16] w-full cursor-pointer overflow-hidden bg-neutral-900";
+
+  return (
+    <li
+      className={`relative w-[66vw] max-w-[260px] shrink-0 snap-center bg-card p-2.5 pb-4 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 motion-reduce:rotate-0 motion-reduce:transition-none lg:w-auto lg:max-w-none ${
+        CARD_TILTS[index % CARD_TILTS.length]
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute -top-3 left-1/2 z-10 h-6 w-24 -translate-x-1/2 bg-yellow-200/80 shadow-sm ${
+          TAPE_TILTS[index % TAPE_TILTS.length]
+        }`}
+      />
+
+      {reel.video ? (
         <button
           type="button"
-          onClick={() => setIsPlaying(true)}
-          aria-label={`تشغيل الريل رقم ${index + 1}`}
-          className="group absolute inset-0 flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4 bg-gradient-to-br from-[#feda75] via-[#d62976] to-[#4f5bd5] text-white"
+          aria-label={`تشغيل: ${reel.title}`}
+          onMouseEnter={play}
+          onMouseLeave={pause}
+          onClick={() => (isPlaying ? pause() : play())}
+          className={mediaClass}
         >
-          <InstagramIcon className="absolute top-4 right-4 h-6 w-6 opacity-90" />
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-transform duration-200 group-hover:scale-110">
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="h-7 w-7 translate-x-0.5"
-              aria-hidden="true"
-            >
-              <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11-6.86a1 1 0 0 0 0-1.7l-11-6.86A1 1 0 0 0 8 5.14z" />
-            </svg>
-          </span>
-          <span className="text-sm font-bold">اضغط للمشاهدة</span>
+          {media}
         </button>
+      ) : (
+        <a
+          href={reelUrl(reel.code)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`شاهد على إنستغرام: ${reel.title}`}
+          className={mediaClass}
+        >
+          {media}
+        </a>
       )}
-    </div>
+
+      <div className="px-0.5 pt-3">
+        <p className="text-sm sm:text-base font-black leading-snug text-card-foreground">
+          {reel.title}
+        </p>
+        <a
+          href={reelUrl(reel.code)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-primary hover:underline"
+        >
+          شاهد على إنستغرام ←
+        </a>
+      </div>
+    </li>
   );
 };
 
 export const InstagramReelsSection: React.FC = () => {
-  const codes = REEL_URLS.map(getReelCode).filter(
-    (code): code is string => code !== null,
-  );
-
-  if (codes.length === 0) return null;
+  if (REELS.length === 0) return null;
 
   return (
     <section id="reels" className="py-16 sm:py-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-14">
           <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
             Tredro على{" "}
             <span className="text-primary text-3xl sm:text-5xl font-black tracking-tight">
@@ -75,13 +162,13 @@ export const InstagramReelsSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-auto sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
-          {codes.map((code, index) => (
-            <ReelCard key={code} code={code} index={index} />
+        <ul className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pt-4 pb-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-8 lg:overflow-visible lg:px-0">
+          {REELS.map((reel, index) => (
+            <ReelCard key={reel.code} reel={reel} index={index} />
           ))}
-        </div>
+        </ul>
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-6 flex justify-center">
           <a
             href={INSTAGRAM_URL}
             target="_blank"
