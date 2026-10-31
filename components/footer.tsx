@@ -37,7 +37,7 @@ const InstagramIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 const MANDOUB_URL = "https://mandoub.tredro.online";
-const CUSTOMER_URL = "https://customer.tredro.online";
+export const CUSTOMER_URL = "https://customer.tredro.online";
 const CONTACT_EMAIL = "tredro.syr@gmail.com";
 
 const siteLinks = [

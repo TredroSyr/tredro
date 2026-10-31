@@ -13,6 +13,7 @@ import { useThemeStore } from "@/store/use-theme-store";
 
 const NAV_ITEMS = [
   { href: "/", label: "الرئيسية" },
+  { href: "/#demo", label: "العرض التوضيحي" },
   { href: "/#work-sprawl", label: "التحديات" },
   { href: "/#rep-mobile-inspect", label: "تطبيق المندوب" },
   { href: "/#product", label: "المزايا" },

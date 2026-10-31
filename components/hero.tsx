@@ -8,8 +8,8 @@ export const HeroSection = () => {
     window.open("https://dashboard.tredro.online/", "_blank", "noopener,noreferrer");
   };
 
-  const handleScrollToBrain = () => {
-    document.querySelector("#brain")?.scrollIntoView({ behavior: "smooth" });
+  const handleScrollToDemo = () => {
+    document.querySelector("#demo")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -38,6 +38,14 @@ export const HeroSection = () => {
             >
               <span>ابدأ تجربة Tredro مجاناً</span>
               <IconRenderer name="arrow-up-right" />
+            </Button>
+            <Button
+              onClick={handleScrollToDemo}
+              variant="outline"
+              className="p-6 flex justify-center items-center rounded-3xl active:scale-95 transition-all duration-200"
+            >
+              <IconRenderer name="video_outlined" />
+              <span>شاهد العرض التوضيحي</span>
             </Button>
           </div>
 

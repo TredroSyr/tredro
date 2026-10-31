@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { IconRenderer } from "@/assets/icons/iconRenderer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { DASHBOARD_URL } from "@/components/header";
+import { CUSTOMER_URL } from "@/components/footer";
 
 const AboutUs = () => {
   const calendarDays = [
@@ -347,7 +348,13 @@ const AboutUs = () => {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                 <Button
-                  render={<Link href="/company" />}
+                  render={
+                    <a
+                      href={DASHBOARD_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
                   size="lg"
                   variant="secondary"
                   className="text-sm"
@@ -356,7 +363,13 @@ const AboutUs = () => {
                   <span>ابدأ كشركة توزيع الآن</span>
                 </Button>
                 <Button
-                  render={<Link href="/customer" />}
+                  render={
+                    <a
+                      href={CUSTOMER_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    />
+                  }
                   variant="outline"
                   size="lg"
                   className="text-sm bg-transparent border-primary-foreground/30 !text-white hover:bg-white/10"

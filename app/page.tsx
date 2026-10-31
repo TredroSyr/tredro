@@ -1,4 +1,5 @@
 "use client";
+import { DemoVideoSection } from "@/components/demo-video-section";
 import { FeatureGrid } from "@/components/feature-grid";
 import { HeroSection } from "@/components/hero";
 import { RepPhoneInspectSection } from "@/components/rep-phone-Inspect";
@@ -8,6 +9,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <DemoVideoSection />
       <WorkSprawlSection />
       <RepPhoneInspectSection />
       <FeatureGrid />
