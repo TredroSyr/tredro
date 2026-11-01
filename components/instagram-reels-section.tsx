@@ -34,10 +34,12 @@ const PlayIcon = () => (
   </svg>
 );
 
-const ReelCard: React.FC<{ reel: Reel; index: number }> = ({
-  reel,
-  index,
-}) => {
+const ReelCard: React.FC<{
+  reel: Reel;
+  index: number;
+  // Copy used only to make the mobile marquee loop seamlessly.
+  duplicate?: boolean;
+}> = ({ reel, index, duplicate = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const poster = `/reels/${reel.code}.jpg`;
@@ -93,9 +95,11 @@ const ReelCard: React.FC<{ reel: Reel; index: number }> = ({
 
   return (
     <li
-      className={`relative w-[66vw] max-w-[260px] shrink-0 snap-center bg-card p-2.5 pb-4 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 motion-reduce:rotate-0 motion-reduce:transition-none lg:w-auto lg:max-w-none ${
-        CARD_TILTS[index % CARD_TILTS.length]
-      }`}
+      aria-hidden={duplicate || undefined}
+      inert={duplicate || undefined}
+      className={`relative w-[66vw] max-w-[260px] shrink-0 bg-card p-2.5 pb-4 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] transition-all duration-300 hover:-translate-y-1 hover:rotate-0 motion-reduce:rotate-0 motion-reduce:transition-none lg:w-auto lg:max-w-none ${
+        duplicate ? "motion-reduce:hidden lg:hidden" : ""
+      } ${CARD_TILTS[index % CARD_TILTS.length]}`}
     >
       <span
         aria-hidden="true"
@@ -162,11 +166,24 @@ export const InstagramReelsSection: React.FC = () => {
           </p>
         </div>
 
-        <ul className="-mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pt-4 pb-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-8 lg:overflow-visible lg:px-0">
-          {REELS.map((reel, index) => (
-            <ReelCard key={reel.code} reel={reel} index={index} />
-          ))}
-        </ul>
+        {/* Below lg the list is rendered twice and drifts slowly as a
+            seamless marquee (pauses on touch/hover). Reduced-motion users get
+            a plain swipeable row instead. */}
+        <div className="-mx-4 overflow-hidden motion-reduce:overflow-x-auto motion-reduce:[scrollbar-width:none] motion-reduce:[&::-webkit-scrollbar]:hidden lg:mx-0 lg:overflow-visible">
+          <ul className="flex w-max gap-6 pe-6 pt-4 pb-8 animate-reels-marquee hover:[animation-play-state:paused] active:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:ps-6 lg:grid lg:w-auto lg:animate-none lg:grid-cols-4 lg:gap-8 lg:pe-0">
+            {REELS.map((reel, index) => (
+              <ReelCard key={reel.code} reel={reel} index={index} />
+            ))}
+            {REELS.map((reel, index) => (
+              <ReelCard
+                key={`${reel.code}-dup`}
+                reel={reel}
+                index={index}
+                duplicate
+              />
+            ))}
+          </ul>
+        </div>
 
         <div className="mt-6 flex justify-center">
           <a

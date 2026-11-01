@@ -15,12 +15,16 @@ export const metadata: Metadata = {
       "ar-SA": "/cookies",
     },
   },
+  // Child openGraph/twitter objects replace the root ones, so the share
+  // image has to be repeated here.
   openGraph: {
+    images: ["/og-image.png"],
     url: `${SITE_URL}/cookies`,
     title: COOKIES_TITLE,
     description: COOKIES_DESCRIPTION,
   },
   twitter: {
+    images: ["/og-image.png"],
     title: COOKIES_TITLE,
     description: COOKIES_DESCRIPTION,
   },

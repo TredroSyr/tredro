@@ -63,7 +63,7 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.45 0.188 259.81);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: #f5dfc4;
+  --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -380,6 +380,18 @@
 @utility animate-bell-shake {
   transform-origin: top center;
   animation: bellShake 2.5s ease-in-out infinite;
+}
+
+/* Mobile reels marquee: the list is duplicated and has trailing padding equal
+   to its gap, so shifting by exactly half its width loops seamlessly. Positive
+   X because the page is RTL (upcoming cards sit to the left). */
+@utility animate-reels-marquee {
+  animation: reels-marquee 45s linear infinite;
+}
+@keyframes reels-marquee {
+  to {
+    transform: translateX(50%);
+  }
 }
 
 @keyframes roadDash {

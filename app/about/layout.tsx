@@ -15,12 +15,16 @@ export const metadata: Metadata = {
       "ar-SA": "/about",
     },
   },
+  // Child openGraph/twitter objects replace the root ones, so the share
+  // image has to be repeated here.
   openGraph: {
+    images: ["/og-image.png"],
     url: `${SITE_URL}/about`,
     title: ABOUT_TITLE,
     description: ABOUT_DESCRIPTION,
   },
   twitter: {
+    images: ["/og-image.png"],
     title: ABOUT_TITLE,
     description: ABOUT_DESCRIPTION,
   },
